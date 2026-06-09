@@ -1,1071 +1,235 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Découvrir le jeune apprenant – 1302</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#08090f;
-  --surface:#111218;
-  --surface2:#181920;
-  --border:#1e2030;
-  --border2:#252840;
-  --text:#f0f1f8;
-  --muted:#6b7280;
-  --muted2:#4b5264;
-  --c1:#818cf8;--c2:#a78bfa;--c3:#38bdf8;--c4:#34d399;
-  --c5:#fbbf24;--c6:#f87171;--c7:#f472b6;--c8:#2dd4bf;
-  --c9:#fb923c;--c10:#c084fc;--cexam:#4ade80;
-}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-
-/* ── SIDEBAR ── */
-#sidebar{
-  position:fixed;top:0;left:0;height:100vh;width:220px;
-  background:var(--surface);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;z-index:200;overflow-y:auto;
-  scrollbar-width:none;
-}
-#sidebar::-webkit-scrollbar{display:none}
-.sb-logo{padding:20px 18px 16px;border-bottom:1px solid var(--border)}
-.sb-logo h2{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.sb-logo p{font-size:.85rem;font-weight:700;color:var(--text);line-height:1.3}
-.sb-section{padding:10px 10px 4px;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)}
-.sb-btn{
-  display:flex;align-items:center;gap:10px;padding:9px 12px;margin:1px 6px;
-  border-radius:8px;background:none;border:none;color:var(--muted);cursor:pointer;
-  font-size:.82rem;font-weight:500;text-align:left;width:calc(100% - 12px);
-  transition:.15s;white-space:nowrap;overflow:hidden;
-}
-.sb-btn:hover{background:var(--surface2);color:var(--text)}
-.sb-btn.active{background:var(--border2);color:var(--text)}
-.sb-btn .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--c,#4b5264)}
-.sb-btn.active .dot{box-shadow:0 0 6px var(--c,#818cf8)}
-.sb-exam-btn{
-  margin:12px 10px 16px;padding:10px 14px;border-radius:10px;
-  background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(34,197,94,.05));
-  border:1px solid rgba(74,222,128,.25);color:#4ade80;
-  cursor:pointer;font-size:.82rem;font-weight:700;text-align:center;
-  display:flex;align-items:center;justify-content:center;gap:7px;
-  transition:.2s;
-}
-.sb-exam-btn:hover{background:linear-gradient(135deg,rgba(74,222,128,.25),rgba(34,197,94,.1));border-color:rgba(74,222,128,.5)}
-.sb-exam-btn.active{background:linear-gradient(135deg,rgba(74,222,128,.3),rgba(34,197,94,.15));border-color:#4ade80}
-
-/* ── MAIN ── */
-#main{margin-left:220px;min-height:100vh}
-.page{display:none;padding:32px 32px 60px;max-width:860px}
-.page.active{display:block}
-
-/* ── HOME ── */
-.home-hero{
-  background:linear-gradient(135deg,rgba(129,140,248,.08) 0%,rgba(167,139,250,.05) 50%,transparent 100%);
-  border:1px solid var(--border2);border-radius:20px;padding:36px 32px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.home-hero::before{
-  content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;
-  background:radial-gradient(circle,rgba(129,140,248,.15),transparent 70%);pointer-events:none;
-}
-.home-hero h1{font-size:1.75rem;font-weight:800;line-height:1.2;margin-bottom:8px}
-.home-hero h1 span{background:linear-gradient(90deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.home-hero p{color:var(--muted);font-size:.9rem}
-.home-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);border-radius:20px;padding:5px 12px;font-size:.75rem;font-weight:600;color:#4ade80;margin-bottom:14px}
-
-.ch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
-.ch-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:14px;
-  padding:18px;cursor:pointer;transition:.2s;position:relative;overflow:hidden;
-}
-.ch-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--c,transparent),transparent);opacity:.05;pointer-events:none}
-.ch-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
-.ch-card .cnum{font-size:1.6rem;font-weight:900;color:var(--c);margin-bottom:8px;line-height:1}
-.ch-card h3{font-size:.85rem;font-weight:700;margin-bottom:4px;color:var(--text)}
-.ch-card p{font-size:.75rem;color:var(--muted);line-height:1.5}
-.ch-card-exam{background:linear-gradient(135deg,rgba(74,222,128,.08),transparent);border-color:rgba(74,222,128,.2)}
-.ch-card-exam:hover{border-color:rgba(74,222,128,.4)}
-
-/* ── PAGE HEADER ── */
-.ph{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border)}
-.ph-tag{display:inline-flex;align-items:center;gap:6px;border-radius:6px;padding:4px 10px;font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px}
-.ph h1{font-size:1.5rem;font-weight:800;line-height:1.2;margin-bottom:6px}
-.ph p{color:var(--muted);font-size:.85rem}
-
-/* ── ACCORDION ── */
-.acc{margin-bottom:6px}
-.acc-btn{
-  width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);
-  border-radius:11px;padding:14px 18px;color:var(--text);cursor:pointer;
-  font-size:.875rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;
-  transition:.15s;gap:12px;
-}
-.acc-btn:hover{background:var(--surface2);border-color:var(--border2)}
-.acc-btn.open{border-color:var(--border2);border-radius:11px 11px 0 0;background:var(--surface2)}
-.acc-icon{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:var(--border);color:var(--muted);font-size:.65rem;flex-shrink:0;transition:.3s}
-.acc-btn.open .acc-icon{transform:rotate(180deg);background:var(--border2)}
-.acc-body{
-  display:none;background:var(--surface);border:1px solid var(--border2);border-top:none;
-  border-radius:0 0 11px 11px;padding:18px 20px;
-  font-size:.855rem;line-height:1.75;color:#c8cfe0;margin-bottom:6px;
-}
-.acc-body.show{display:block}
-.acc-body ul,.acc-body ol{padding-left:20px;margin:8px 0}
-.acc-body li{margin-bottom:5px}
-.acc-body strong{color:var(--text)}
-.acc-body p{margin-bottom:8px}
-.acc-body p:last-child{margin-bottom:0}
-
-/* ── TABLES ── */
-.ctable{width:100%;border-collapse:collapse;font-size:.82rem;margin:10px 0}
-.ctable th{padding:10px 14px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
-.ctable td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:#c8cfe0}
-.ctable tr:last-child td{border-bottom:none}
-.ctable tr:hover td{background:rgba(255,255,255,.02)}
-
-/* ── BOXES ── */
-.box{border-radius:10px;padding:14px 16px;margin:10px 0;font-size:.855rem;line-height:1.7}
-.box ul{padding-left:18px;margin-top:4px}
-.box li{margin-bottom:3px}
-.box p,.box li{color:#c8cfe0}
-.box strong{color:var(--text)}
-.box-blue{background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.18)}
-.box-green{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.18)}
-.box-red{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.18)}
-.box-yellow{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.18)}
-.box-purple{background:rgba(192,132,252,.06);border:1px solid rgba(192,132,252,.18)}
-
-/* ── KEY TERM ── */
-.kterm{background:rgba(129,140,248,.07);border-left:3px solid #818cf8;border-radius:0 8px 8px 0;padding:12px 16px;margin:10px 0;font-size:.855rem;color:#c8cfe0}
-.kterm strong{color:#a5b4fc}
-
-/* ── STADES ── */
-.stade{padding:13px 16px;border-radius:10px;margin:8px 0;font-size:.84rem;line-height:1.65;color:#c8cfe0}
-.stade strong{color:var(--text)}
-.s-purple{background:rgba(192,132,252,.07);border:1px solid rgba(192,132,252,.2)}
-.s-blue{background:rgba(129,140,248,.07);border:1px solid rgba(129,140,248,.2)}
-.s-green{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2)}
-.s-red{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2)}
-
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
-@media(max-width:500px){.grid2{grid-template-columns:1fr}}
-
-/* ── COMPARE PILL ── */
-.cpill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:600}
-.cpill-green{background:rgba(74,222,128,.12);color:#4ade80;border:1px solid rgba(74,222,128,.25)}
-.cpill-red{background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.25)}
-.cpill-yellow{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.25)}
-
-/* ── EXAM ── */
-#exam-page{padding:32px;max-width:720px}
-.exam-hero{
-  background:linear-gradient(135deg,rgba(74,222,128,.08),rgba(34,197,94,.04));
-  border:1px solid rgba(74,222,128,.2);border-radius:20px;padding:36px;
-  text-align:center;margin-bottom:0;
-}
-.exam-hero h2{font-size:1.6rem;font-weight:800;margin-bottom:8px}
-.exam-hero h2 span{color:#4ade80}
-.exam-hero p{color:var(--muted);font-size:.9rem;margin-bottom:28px}
-.config-row{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;margin-bottom:28px}
-.config-group label{display:block;font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;text-align:left}
-.config-pills{display:flex;gap:6px}
-.cpill-btn{padding:8px 16px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--muted);cursor:pointer;font-size:.8rem;font-weight:600;transition:.15s}
-.cpill-btn:hover{border-color:rgba(74,222,128,.4);color:#4ade80}
-.cpill-btn.sel{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.4);color:#4ade80}
-.start-btn{padding:14px 44px;background:linear-gradient(135deg,#4ade80,#22c55e);border:none;border-radius:12px;color:#0a1a0f;font-size:.95rem;font-weight:800;cursor:pointer;transition:.2s;letter-spacing:.01em}
-.start-btn:hover{transform:scale(1.04);box-shadow:0 0 24px rgba(74,222,128,.3)}
-
-/* Quiz */
-#exam-quiz{display:none}
-.qhud{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.qprog-text{font-size:.8rem;color:var(--muted);font-weight:600}
-.qtimer{font-size:.85rem;font-weight:700;color:#fbbf24;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);padding:5px 12px;border-radius:20px}
-.qpbar{height:4px;background:var(--border);border-radius:2px;margin-bottom:24px;overflow:hidden}
-.qpfill{height:100%;background:linear-gradient(90deg,#818cf8,#c084fc);border-radius:2px;transition:.4s}
-.qcard{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;overflow:hidden}
-.qnum-badge{display:inline-block;background:rgba(129,140,248,.12);border:1px solid rgba(129,140,248,.2);border-radius:6px;padding:4px 10px;font-size:.72rem;font-weight:700;color:#818cf8;margin-bottom:14px;letter-spacing:.04em;text-transform:uppercase}
-.qtext{font-size:1rem;font-weight:600;line-height:1.6;color:var(--text);margin-bottom:22px}
-.opts{display:flex;flex-direction:column;gap:8px}
-.opt{
-  padding:13px 16px;background:var(--surface2);border:1px solid var(--border);
-  border-radius:10px;cursor:pointer;font-size:.855rem;transition:.15s;
-  text-align:left;color:#c8cfe0;font-family:inherit;font-weight:500;
-}
-.opt:hover:not(.answered){background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.35);color:var(--text)}
-.opt.correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.4);color:#6ee7b7}
-.opt.wrong{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.4);color:#fca5a5}
-.opt.show-correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.4);color:#6ee7b7}
-.opt.answered{cursor:default}
-.expl-box{background:rgba(129,140,248,.06);border:1px solid rgba(129,140,248,.2);border-radius:10px;padding:14px 16px;margin-top:16px;font-size:.82rem;color:#a5b4fc;display:none;line-height:1.7}
-.expl-box.show{display:block}
-.q-footer{display:flex;justify-content:flex-end;margin-top:18px}
-.next-btn{padding:10px 24px;background:linear-gradient(135deg,#6366f1,#818cf8);border:none;border-radius:9px;color:#fff;font-size:.85rem;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;display:none}
-.next-btn:hover{transform:scale(1.03);box-shadow:0 0 16px rgba(99,102,241,.4)}
-
-/* Result */
-#exam-result{display:none;text-align:center;padding:20px 0}
-.score-ring{
-  width:148px;height:148px;border-radius:50%;margin:0 auto 22px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border:5px solid #4ade80;background:rgba(74,222,128,.08);
-  box-shadow:0 0 40px rgba(74,222,128,.15);
-}
-.score-ring .snum{font-size:2.6rem;font-weight:900;color:#4ade80;line-height:1}
-.score-ring .stot{font-size:.85rem;color:rgba(74,222,128,.6);font-weight:600}
-.res-title{font-size:1.3rem;font-weight:800;margin-bottom:6px}
-.res-sub{color:var(--muted);font-size:.875rem;margin-bottom:28px}
-.res-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
-.btn-restart{padding:11px 28px;background:linear-gradient(135deg,#6366f1,#818cf8);border:none;border-radius:10px;color:#fff;font-size:.875rem;font-weight:700;cursor:pointer;font-family:inherit}
-.btn-home{padding:11px 28px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;color:var(--text);font-size:.875rem;font-weight:600;cursor:pointer;font-family:inherit}
-.review-title{font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;text-align:left;margin-bottom:12px}
-.ri{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:8px;border-left:3px solid var(--border);text-align:left}
-.ri.ok{border-left-color:#4ade80}
-.ri.ko{border-left-color:#f87171}
-.ri-q{font-size:.84rem;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.5}
-.ri-a{font-size:.8rem;color:var(--muted)}
-.ri-a.g{color:#4ade80}
-.ri-a.r{color:#f87171}
-
-/* MOBILE */
-#mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:300;padding:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
-@media(max-width:768px){
-  #sidebar{display:none}
-  #main{margin-left:0}
-  .page{padding:20px 16px 80px}
-  #exam-page{padding:20px 16px 80px}
-  #mob-nav{display:block}
-  .mob-inner{display:inline-flex;padding:8px}
-  .mob-btn{display:inline-flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;border-radius:8px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:.6rem;font-weight:600;white-space:nowrap}
-  .mob-btn.active{color:var(--text);background:var(--surface2)}
-  .mob-icon{font-size:1.1rem}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U1207 - Les Objectifs de l'Examen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', system-ui, sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
 
-<!-- SIDEBAR -->
-<nav id="sidebar">
-  <div class="sb-logo">
-    <h2>Cours · 1302</h2>
-    <p>Découvrir le jeune apprenant</p>
-  </div>
-  <div class="sb-section">Cours</div>
-  <button class="sb-btn active" data-tab="home" style="--c:#818cf8"><span class="dot"></span>Accueil</button>
-  <button class="sb-btn" data-tab="ch1" style="--c:#818cf8"><span class="dot"></span>1 · Dév. cognitif</button>
-  <button class="sb-btn" data-tab="ch2" style="--c:#a78bfa"><span class="dot"></span>2 · Fonctions exec.</button>
-  <button class="sb-btn" data-tab="ch3" style="--c:#38bdf8"><span class="dot"></span>3 · Attention</button>
-  <button class="sb-btn" data-tab="ch4" style="--c:#34d399"><span class="dot"></span>4 · Neurosciences</button>
-  <button class="sb-btn" data-tab="ch5" style="--c:#fbbf24"><span class="dot"></span>5 · Cerveau ado</button>
-  <button class="sb-btn" data-tab="ch6" style="--c:#f87171"><span class="dot"></span>6 · Biais cognitifs</button>
-  <button class="sb-btn" data-tab="ch7" style="--c:#f472b6"><span class="dot"></span>7 · Métacognition</button>
-  <button class="sb-btn" data-tab="ch8" style="--c:#2dd4bf"><span class="dot"></span>8 · Dév. émotionnel</button>
-  <button class="sb-btn" data-tab="ch9" style="--c:#fb923c"><span class="dot"></span>9 · Motivation</button>
-  <button class="sb-btn" data-tab="ch10" style="--c:#c084fc"><span class="dot"></span>10 · Théories</button>
-  <div style="flex:1"></div>
-  <button class="sb-exam-btn" data-tab="exam">🎯 Simuler l'examen</button>
-</nav>
-
-<!-- MOBILE NAV -->
-<nav id="mob-nav"><div class="mob-inner">
-  <button class="mob-btn active" data-tab="home"><span class="mob-icon">🏠</span>Accueil</button>
-  <button class="mob-btn" data-tab="ch1"><span class="mob-icon">🧠</span>Cognitif</button>
-  <button class="mob-btn" data-tab="ch2"><span class="mob-icon">⚙️</span>Exec.</button>
-  <button class="mob-btn" data-tab="ch3"><span class="mob-icon">👁</span>Attention</button>
-  <button class="mob-btn" data-tab="ch4"><span class="mob-icon">🔬</span>Neuro</button>
-  <button class="mob-btn" data-tab="ch5"><span class="mob-icon">🧑‍🎤</span>Ado</button>
-  <button class="mob-btn" data-tab="ch6"><span class="mob-icon">🪞</span>Biais</button>
-  <button class="mob-btn" data-tab="ch7"><span class="mob-icon">💭</span>Méta</button>
-  <button class="mob-btn" data-tab="ch8"><span class="mob-icon">❤️</span>Émotions</button>
-  <button class="mob-btn" data-tab="ch9"><span class="mob-icon">🔥</span>Motiv.</button>
-  <button class="mob-btn" data-tab="ch10"><span class="mob-icon">📚</span>Théories</button>
-  <button class="mob-btn" data-tab="exam"><span class="mob-icon">🎯</span>Examen</button>
-</div></nav>
-
-<div id="main">
-
-<!-- HOME -->
-<div class="page active" id="home">
-  <div class="home-hero">
-    <div class="home-badge">📖 Cours 1302 · Psychologie de l'éducation</div>
-    <h1>Découvrir le<br><span>jeune apprenant</span></h1>
-    <p>10 chapitres · 46 questions QCM · Toute la matière pour ton examen</p>
-  </div>
-  <div class="ch-grid">
-    <div class="ch-card" style="--c:#818cf8" onclick="goTo('ch1')"><div class="cnum">1</div><h3>Développement cognitif</h3><p>Piaget, Vygotsky, ZPD, stades de développement</p></div>
-    <div class="ch-card" style="--c:#a78bfa" onclick="goTo('ch2')"><div class="cnum">2</div><h3>Fonctions exécutives</h3><p>Inhibition, flexibilité cognitive, mémoire de travail</p></div>
-    <div class="ch-card" style="--c:#38bdf8" onclick="goTo('ch3')"><div class="cnum">3</div><h3>Attention & Apprentissage</h3><p>4 piliers de Dehaene, rôle de l'erreur</p></div>
-    <div class="ch-card" style="--c:#34d399" onclick="goTo('ch4')"><div class="cnum">4</div><h3>Neurosciences</h3><p>Mémoire, plasticité cérébrale, sommeil, neuromythes</p></div>
-    <div class="ch-card" style="--c:#fbbf24" onclick="goTo('ch5')"><div class="cnum">5</div><h3>Cerveau adolescent</h3><p>Transformations, préjugés, ajustements pédagogiques</p></div>
-    <div class="ch-card" style="--c:#f87171" onclick="goTo('ch6')"><div class="cnum">6</div><h3>Biais cognitifs</h3><p>6 catégories, biais de confirmation, solutions</p></div>
-    <div class="ch-card" style="--c:#f472b6" onclick="goTo('ch7')"><div class="cnum">7</div><h3>Métacognition</h3><p>Autorégulation, pauses actives, 3 dimensions</p></div>
-    <div class="ch-card" style="--c:#2dd4bf" onclick="goTo('ch8')"><div class="cnum">8</div><h3>Développement émotionnel</h3><p>Bowlby, Erikson, concept de soi, attachement</p></div>
-    <div class="ch-card" style="--c:#fb923c" onclick="goTo('ch9')"><div class="cnum">9</div><h3>Motivation & Engagement</h3><p>Festinger, Dweck, Viau, feedbacks Hattie</p></div>
-    <div class="ch-card" style="--c:#c084fc" onclick="goTo('ch10')"><div class="cnum">10</div><h3>Théories de l'apprentissage</h3><p>Béhaviorisme, cognitivisme, constructivisme…</p></div>
-    <div class="ch-card ch-card-exam" style="--c:#4ade80" onclick="goTo('exam')"><div class="cnum">🎯</div><h3>Simuler un examen</h3><p>QCM chronométré — toute la matière</p></div>
-  </div>
-</div>
-
-<!-- CH1 -->
-<div class="page" id="ch1">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(129,140,248,.1);color:#818cf8;border:1px solid rgba(129,140,248,.2)">Chapitre 1</div>
-    <h1>Développement cognitif</h1>
-    <p>Piaget · Vygotsky · ZPD · Stades · Assimilation / Accommodation</p>
-  </div>
-
-  <div class="acc">
-    <button class="acc-btn" onclick="tog(this)"><span>Piaget — Point de vue sur l'apprentissage</span><span class="acc-icon">▼</span></button>
-    <div class="acc-body">
-      <p>Pour Piaget, l'apprentissage est un <strong>processus individuel et actif</strong> : l'enfant construit ses connaissances par son action sur le monde.</p>
-      <ul><li><strong>Assimilation</strong> : intégrer une info nouvelle dans un schème existant sans le modifier <em>(ex : appeler "cheval" un zèbre)</em></li><li><strong>Accommodation</strong> : modifier ses schèmes pour s'adapter à une réalité nouvelle <em>(ex : créer la catégorie "zèbre")</em></li></ul>
-      <div class="box box-blue"><strong>💡 Clé :</strong> Le développement <strong>précède</strong> l'apprentissage — on ne peut pas enseigner avant que l'enfant soit biologiquement prêt.</div>
-      <p><strong>Rôle de l'enseignant :</strong> proposer un environnement riche et des <em>conflits cognitifs</em> qui poussent l'élève à réorganiser ses schèmes.</p>
-    </div>
-  </div>
-
-  <div class="acc">
-    <button class="acc-btn" onclick="tog(this)"><span>Vygotsky — Point de vue sur l'apprentissage</span><span class="acc-icon">▼</span></button>
-    <div class="acc-body">
-      <p>Pour Vygotsky, ce sont les <strong>interactions sociales et la culture</strong> qui sont le moteur principal.</p>
-      <div class="kterm"><strong>L'apprentissage précède et stimule le développement</strong> — inverse de Piaget.</div>
-      <p><strong>Le langage</strong> est l'outil psychologique central : il joue un rôle actif dans la création et modulation de la pensée. <strong>→ Faites verbaliser vos élèves !</strong></p>
-    </div>
-  </div>
-
-  <div class="acc">
-    <button class="acc-btn" onclick="tog(this)"><span>Comparaison Piaget / Vygotsky</span><span class="acc-icon">▼</span></button>
-    <div class="acc-body">
-      <table class="ctable">
-        <tr><th>Dimension</th><th style="color:#818cf8">Piaget</th><th style="color:#a78bfa">Vygotsky</th></tr>
-        <tr><td>Moteur du développement</td><td>Action individuelle</td><td>Interactions sociales &amp; culture</td></tr>
-        <tr><td>Apprentissage / développement</td><td>Développement <strong>avant</strong></td><td>Apprentissage <strong>avant</strong></td></tr>
-        <tr><td>Rôle de l'adulte</td><td>Prépare l'environnement</td><td>Médiateur actif (ZPD)</td></tr>
-        <tr><td>Rôle du langage</td><td>Secondaire</td><td>Central, structure la pensée</td></tr>
-        <tr><td>Point commun</td><td colspan="2">Constructivistes : l'enfant construit activement ses connaissances</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="acc">
-    <button class="acc-btn" onclick="tog(this)"><span>ZPD — Zone Proximale de Développement</span><span class="acc-icon">▼</span></button>
-    <div class="acc-body">
-      <div class="kterm"><strong>ZPD</strong> = écart entre ce que l'enfant peut faire <em>seul</em> et ce qu'il peut faire <em>avec l'aide</em> d'un adulte ou pair plus compétent.</div>
-      <p><strong>Exemple (Français, 3e/4e primaire)</strong> — rédiger la suite d'une histoire :</p>
-      <ol><li>Activation des acquis (discussion collective)</li><li>Modélisation par l'enseignant (étayage initial)</li><li>Écriture guidée en groupe (ZPD active)</li><li>Écriture individuelle (désétayage progressif)</li></ol>
-    </div>
-  </div>
-
-  <div class="acc">
-    <button class="acc-btn" onclick="tog(this)"><span>Les 4 stades de développement de Piaget</span><span class="acc-icon">▼</span></button>
-    <div class="acc-body">
-      <div class="stade s-purple"><strong>🟣 Sensorimoteur (0–2 ans)</strong><br>Exploration par les 5 sens. Acquisition clé : permanence de l'objet (8-9 mois).<br><em>Activités : cache-cache, jouets texturés, musique, jeux de bain</em></div>
-      <div class="stade s-blue"><strong>🔵 Préopératoire (2–7 ans)</strong><br>Animisme, langage, pensée égocentrique, âge intuitif.<br><em>Activités : jeux de rôle, peinture, dessins libres</em></div>
-      <div class="stade s-green"><strong>🟢 Opérations concrètes (7–11 ans)</strong><br>Logique sur situations concrètes, conservation, décentration.<br><em>Activités : tri, expériences scientifiques, jeux de cartes</em></div>
-      <div class="stade s-red"><strong>🔴 Opérations formelles (11 ans+)</strong><br>Pensée abstraite, hypothético-déductive.<br><em>Activités : débats, projets de recherche, essais</em></div>
-      <div class="box box-yellow">⚠️ Certaines activités peuvent appartenir à deux stades selon l'âge et la complexité (ex : chasse au trésor → préopératoire OU opérations concrètes).</div>
-    </div>
-  </div>
-</div>
-
-<!-- CH2 -->
-<div class="page" id="ch2">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(167,139,250,.1);color:#a78bfa;border:1px solid rgba(167,139,250,.2)">Chapitre 2</div>
-    <h1>Fonctions exécutives</h1>
-    <p>Inhibition · Flexibilité cognitive · Mémoire de travail</p>
-  </div>
-  <div class="box box-purple">💡 Les FE sont le <strong>meilleur prédicteur de la réussite scolaire</strong>. Elles ne s'enseignent pas directement : il faut les lier à un apprentissage disciplinaire en contexte réel.</div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Définition et contexte</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Fonctions cognitives</strong> = grand ensemble (perception, mémoire, attention, langage…)<br><strong>Fonctions exécutives</strong> = sous-catégorie de <em>haut niveau</em> : régulent et contrôlent comportements, pensées et raisonnements.</div>
-    <p>Fonctions <strong>coûteuses</strong> cognitivement, à disponibilité limitée, requérant un effort conscient. Se déclenchent face à des tâches nouvelles ou complexes.</p>
-    <p>Les FE = le <strong>"pilote"</strong> qui coordonne tout le reste.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>FE 1 · L'Inhibition cognitive</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <p>Capacité à <strong>s'empêcher de produire une réponse automatique</strong>, à écarter les stimulations non pertinentes.</p>
-    <div class="box box-blue">🧪 <strong>Test de Stroop</strong> : énoncer la couleur de l'encre d'un mot dont le sens ne correspond pas → difficile car il faut inhiber la lecture automatique.</div>
-    <div class="box box-purple">🍭 <strong>Test du marshmallow</strong> : les enfants qui résistent ont, à l'âge adulte, de meilleurs résultats scolaires, meilleure santé mentale, plus de résistance au stress et moins de problèmes d'addiction.</div>
-    <p><strong>En classe :</strong> attendre son tour, ne pas répondre impulsivement.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>FE 2 · La Flexibilité cognitive</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <p>Capacité à <strong>passer d'un comportement à un autre</strong> selon les exigences, à adapter ses stratégies face au nouveau. Nécessaire quand l'activité n'est pas routinière.</p>
-    <div class="box box-blue">🧪 Associer chiffre ↔ lettre (1-A, 2-B… jusqu'à Z) : le coût cognitif augmente car on quitte l'automatisme.</div>
-    <p>C'est l'opposé de l'inhibition : au lieu de <em>résister</em> à une stratégie, on doit en <em>changer</em>.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>FE 3 · La Mémoire de travail</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Mémoire de travail</strong> = maintenir et manipuler des informations dans l'esprit tout en opérant une tâche.</div>
-    <p><strong>Empan mnésique</strong> : un adulte retient environ <strong>7 éléments</strong> simultanément.</p>
-    <div class="grid2">
-      <div class="box box-blue">📝 <strong>Aspect verbal</strong><br>Retenir un mot, un chiffre, une phrase</div>
-      <div class="box box-purple">👁️ <strong>Aspect visuo-spatial</strong><br>Retenir un chemin, un emplacement</div>
-    </div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Comment travailler les FE · Liens Piaget/Vygotsky</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="box box-green">✅ <strong>Approche préférable</strong> : lier les FE à un apprentissage disciplinaire. Les solliciter de manière artificielle hors contexte n'a pas d'impact durable.</div>
-    <table class="ctable">
-      <tr><th>Auteur</th><th>Lien avec les FE</th></tr>
-      <tr><td>Piaget</td><td>Les FE suivent les stades. À chaque stade, l'enfant doit inhiber ses anciens schèmes.</td></tr>
-      <tr><td>Vygotsky</td><td>Les FE ont d'abord une origine sociale. Dans la ZPD, l'adulte étaye les FE immatures. Le langage intérieur = outil de contrôle des FE.</td></tr>
-    </table>
-  </div></div>
-</div>
-
-<!-- CH3 -->
-<div class="page" id="ch3">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(56,189,248,.1);color:#38bdf8;border:1px solid rgba(56,189,248,.2)">Chapitre 3</div>
-    <h1>Attention & Apprentissage</h1>
-    <p>Les 4 piliers de Dehaene · Rôle de l'erreur · Systèmes attentionnels</p>
-  </div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Pilier 1 · L'Attention</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Attention</strong> = mécanisme qui sélectionne et module les informations traitées par le cerveau.</div>
-    <p><strong>3 systèmes :</strong></p>
-    <ol><li><strong>Alerte/éveil</strong> : être disponible pour apprendre</li><li><strong>Orientation/sélection</strong> : trier et canaliser les infos vers la mémoire de travail</li><li><strong>Contrôle exécutif</strong> : gérer les buts, résoudre les conflits entre tâches</li></ol>
-    <div class="box box-red">⚠️ <strong>Cécité inattentionnelle</strong> : quand on est concentré sur une tâche, les stimuli non pertinents peuvent devenir littéralement invisibles.</div>
-    <p><strong>Limites :</strong> on ne peut pas faire deux tâches simultanément. L'attention est une ressource limitée et fluctuante.</p>
-    <div class="box box-blue">💡 Le contrôle exécutif peut être entraîné : méditation, instruments de musique, jeux adaptés. Les enfants de milieux défavorisés en bénéficient le plus.</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Pilier 2 · L'Engagement Actif</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Un organisme passif n'apprend pas.</strong></div>
-    <p>Alterner apprentissage et <strong>auto-tests</strong> produit de meilleurs résultats que l'étude passive (Roediger). L'engagement inclut la <em>métacognition</em> : savoir quand on ne sait pas.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Pilier 3 · Le Feedback (Retour d'information)</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <p>Le cerveau génère en permanence des <strong>prédictions</strong>. Quand une prédiction est infirmée, le <em>signal d'erreur</em> déclenche la plasticité cérébrale → apprentissage.</p>
-    <div class="box box-green">✅ Le feedback doit être immédiat, précis et porter sur la stratégie (pas la personne).</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Pilier 4 · La Consolidation (dont le sommeil)</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <p><strong>Automatisation :</strong> au début, cortex préfrontal très mobilisé. Progressivement, les connaissances se transfèrent vers des réseaux non-conscients → libération de ressources.</p>
-    <p><em>Exemple lecture :</em> l'enfant passe du décodage graphème-phonème à la lecture fluide.</p>
-    <div class="box box-purple">😴 <strong>Le sommeil</strong> rejoue les décharges neuronales de la veille. Améliore mémoire, généralisation et insight.<br>→ <strong>Distribuer les apprentissages tous les jours</strong> plutôt que des sessions intensives rares.</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Le rôle de l'erreur</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="box box-green">✅ <strong>L'erreur n'est pas un échec — c'est un outil d'apprentissage.</strong><br>Le cerveau apprend davantage de ses erreurs. Le signal d'erreur déclenche la plasticité cérébrale.</div>
-    <ul><li>Ne jamais sanctionner face à une erreur (active le stress, bloque l'apprentissage)</li><li>Créer un <strong>espace hors menace</strong> pour que l'élève ose tâtonner</li><li>Valoriser la démarche plutôt que le résultat → lien avec le <em>growth mindset</em> de Dweck</li></ul>
-    <div class="box box-red">❌ À éviter : une classe où l'erreur renvoie l'élève au jugement → l'élève préférera ne pas essayer.</div>
-  </div></div>
-</div>
-
-<!-- CH4 -->
-<div class="page" id="ch4">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2)">Chapitre 4</div>
-    <h1>Neurosciences cognitives</h1>
-    <p>Étapes de la mémoire · Plasticité · Sommeil · Neuromythes · Pratiques pédagogiques</p>
-  </div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Les 4 étapes de la mémoire (dans l'ordre)</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="box box-green">
-      <ol><li><strong>Encodage</strong> : stimuli → organes sensoriels → mémoire sensorielle</li><li><strong>Stockage court terme</strong> : &lt;1 minute grâce à la répétition</li><li><strong>Encodage/Consolidation</strong> : ancrage en mémoire long terme (jours/mois/années)</li><li><strong>Restitution / Récupération</strong> : rappel de l'information</li></ol>
-    </div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Les types de mémoire à long terme</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <p>Mémoire sensorielle (secondes) → court terme (&lt;1 min, ~7 éléments) → long terme (quasi illimitée)</p>
-    <table class="ctable">
-      <tr><th colspan="2" style="color:#818cf8">🔵 Mémoire implicite / inconsciente</th></tr>
-      <tr><td><strong>Procédurale</strong></td><td>Gestes automatiques : faire du vélo, écrire</td></tr>
-      <tr><td><strong>Affective</strong></td><td>Émotions liées aux expériences (peur du chien après morsure)</td></tr>
-      <tr><th colspan="2" style="color:#34d399">🟢 Mémoire explicite / consciente</th></tr>
-      <tr><td><strong>Épisodique</strong></td><td>Souvenirs personnels vécus</td></tr>
-      <tr><td><strong>Sémantique</strong></td><td>Connaissances générales ("Paris = capitale")</td></tr>
-    </table>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Plasticité cérébrale</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Plasticité cérébrale</strong> = capacité du cerveau à se réorganiser tout au long de la vie en créant, renforçant ou supprimant des connexions neuronales.</div>
-    <p>L'éducation = <strong>recyclage neuronal</strong> : les apprentissages culturels (lecture, arithmétique) réutilisent des circuits existants. Justifie l'impact réel de l'enseignant sur le cerveau.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Les bienfaits du sommeil</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <ul><li>Cerveau rejoue les décharges neuronales de la veille à vitesse accélérée</li><li>Consolide la mémoire, améliore la généralisation et l'insight</li><li>Trie les souvenirs selon leur importance</li></ul>
-    <div class="box box-purple">😴 <strong>Implication :</strong> distribuer les apprentissages sur plusieurs jours. Améliorer le sommeil = une des interventions les plus efficaces, surtout pour les élèves avec troubles de l'attention.</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Neuromythes à déconstruire</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="box box-red">
-      <p>❌ <strong>Ces idées sont fausses :</strong></p>
-      <ul><li>On n'utilise que 10% de son cerveau</li><li>Styles d'apprentissage VAK (visuel/auditif/kinesthésique)</li><li>Mozart rend plus intelligent</li><li>Cerveau divisé hémisphère gauche/droit (binaire)</li><li>Le multitâche est possible</li><li>Les intelligences multiples de Gardner (comme théorie neuro)</li><li>Tout se joue avant 3 ans</li><li>Le bilinguisme freine le développement langagier</li></ul>
-    </div>
-  </div></div>
-</div>
-
-<!-- CH5 -->
-<div class="page" id="ch5">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.2)">Chapitre 5</div>
-    <h1>Le Cerveau Adolescent</h1>
-    <p>Transformations neurologiques · Préjugés · Ajustements pédagogiques</p>
-  </div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Le concept d'adolescence</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Adolescence</strong> = transition entre l'enfance et l'âge adulte (biologique, cognitif, affectif, social). Aujourd'hui 3× plus longue qu'au XIXe siècle → jusqu'à 25-30 ans.</div>
-    <div class="grid2">
-      <div class="box box-yellow">🟡 Pré-ado : 10–13 ans</div>
-      <div class="box box-yellow">🟠 Ado : 14–18 ans</div>
-    </div>
-    <div class="box box-yellow">🔴 Post-ado : 18–25/30 ans</div>
-    <p>Âge de <strong>paradoxe</strong> : besoin d'autonomie ET d'être guidé. Âge d'or neurologique (plasticité exceptionnelle).</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>6 transformations neurologiques à l'adolescence</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <ol>
-      <li><strong>Remaniements neuronaux prolongés</strong> : reconfiguration globale jusqu'à 25-30 ans</li>
-      <li><strong>Élagage synaptique</strong> : suppression des connexions peu utilisées → renforce les circuits utiles</li>
-      <li><strong>Myélinisation</strong> : vitesse de transmission neuronale améliorée</li>
-      <li><strong>Cortex préfrontal immature</strong> : planification, contrôle des impulsions — encore en développement</li>
-      <li><strong>Hyperactivation du système limbique</strong> : siège des émotions → recherche de sensations</li>
-      <li><strong>Circuit de récompense modifié</strong> : besoin de nouveauté, présence des pairs = dopamine</li>
-    </ol>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Déconstruire les préjugés sur l'ado</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <table class="ctable">
-      <tr><th>Mythe</th><th>Réalité</th></tr>
-      <tr><td>Comportements dus aux hormones</td><td>C'est la <strong>reconfiguration neurologique</strong> qui en est la cause principale</td></tr>
-      <tr><td>"Tempête cérébrale" incontrôlable</td><td>Maturation <strong>structurée et orientée</strong></td></tr>
-      <tr><td>La recherche d'identité est un problème</td><td>Étape <strong>normale et nécessaire</strong></td></tr>
-      <tr><td>Cerveau triunique de MacLean</td><td>Modèle <strong>scientifiquement dépassé</strong> — fonctionne en réseaux intégrés</td></tr>
-    </table>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Ajustements pédagogiques avec les ados</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <ul>
-      <li><strong>Donner du sens</strong> : l'ado a un besoin neurologique de comprendre POURQUOI</li>
-      <li><strong>Structurer sans rigidifier</strong> : cadre clair et bienveillant</li>
-      <li><strong>Soutenir les FE immatures</strong> : aider à planifier, prioriser, gérer la charge</li>
-      <li><strong>Exploiter l'attrait pour la nouveauté</strong> : varier, proposer des défis</li>
-      <li><strong>Favoriser le sentiment d'appartenance</strong> : travail en groupe, reconnaissance individuelle</li>
-    </ul>
-  </div></div>
-</div>
-
-<!-- CH6 -->
-<div class="page" id="ch6">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2)">Chapitre 6</div>
-    <h1>Biais cognitifs</h1>
-    <p>Définition · 6 catégories · Biais de confirmation · Solutions</p>
-  </div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Qu'est-ce qu'un biais cognitif ?</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Biais cognitif</strong> = raccourci mental inconscient pouvant causer des erreurs de jugement. Origine évolutive : favorisait la rapidité de décision pour la survie.</div>
-    <div class="grid2">
-      <div class="box box-blue"><strong>Dissonance cognitive</strong><br>Inconfort qui pousse à sélectionner les infos cohérentes avec nos croyances</div>
-      <div class="box box-purple"><strong>Système 1 vs 2</strong> (Kahneman)<br>S1 = rapide, intuitif, émotionnel<br>S2 = lent, analytique, réflexif</div>
-    </div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Les 6 catégories de biais cognitifs</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <table class="ctable">
-      <tr><th>Catégorie</th><th>Description</th><th>Exemple</th></tr>
-      <tr><td style="color:#60a5fa"><strong>Sensori-moteurs</strong></td><td>Sens trompés</td><td>Illusions visuelles</td></tr>
-      <tr><td style="color:#34d399"><strong>Attentionnels</strong></td><td>Filtre de l'attention faussé</td><td>Biais de disponibilité, de négativité</td></tr>
-      <tr><td style="color:#fbbf24"><strong>Mnésiques</strong></td><td>Mémoire déformée par l'émotion</td><td>Biais de répétition, du survivant</td></tr>
-      <tr><td style="color:#f87171"><strong>De jugement</strong></td><td>La catégorie la plus riche !</td><td>Effet Halo, biais de confirmation, d'ancrage</td></tr>
-      <tr><td style="color:#a78bfa"><strong>De raisonnement</strong></td><td>Erreurs logiques</td><td>Biais du monde juste, effet Barnum</td></tr>
-      <tr><td style="color:#fb923c"><strong>Sociaux</strong></td><td>Influence du groupe</td><td>Conformisme, biais d'autorité</td></tr>
-    </table>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Le biais de confirmation — détail</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Biais de confirmation</strong> (Peter Wason) : tendance à privilégier les infos qui confirment nos croyances et à minimiser celles qui les contredisent.</div>
-    <p><strong>En classe :</strong> des élèves contestent l'enseignant avec des infos en ligne de personnes connues → biais de confirmation + biais de notoriété.</p>
-    <p><strong>En clinique :</strong> même des thérapeutes expérimentés orientent leur recherche pour confirmer leur diagnostic initial.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Solutions pour se prémunir des biais</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <ul>
-      <li>Développer la <strong>métacognition</strong> : prendre du recul sur son raisonnement</li>
-      <li>Se demander : <em>"Qu'est-ce qui va contre mon hypothèse ?"</em></li>
-      <li>Diversifier les points de vue, s'exposer à des avis contraires</li>
-      <li>Vérifier les sources</li>
-      <li><strong>Pour l'enseignant :</strong> grilles d'évaluation critériées pour limiter l'effet Halo</li>
-    </ul>
-    <div class="box box-purple">🔗 <strong>Lien clé :</strong> Pour lutter contre les biais → apprends à te réguler → pour te réguler → développe ta métacognition.</div>
-  </div></div>
-</div>
-
-<!-- CH7 -->
-<div class="page" id="ch7">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(244,114,182,.1);color:#f472b6;border:1px solid rgba(244,114,182,.2)">Chapitre 7</div>
-    <h1>Métacognition & Pauses actives</h1>
-    <p>Autorégulation · Métacognition · 3 dimensions</p>
-  </div>
-  <div class="box box-red">⚠️ <strong>À ne pas confondre à l'examen :</strong><br>
-  <strong>Pauses métacognitives</strong> (cerveau) = arrêt sur image sur sa pensée.<br>
-  <strong>Pauses actives</strong> (corps) = faire bouger les élèves, prise de possession du corps.</div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>La métacognition</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Métacognition</strong> = "la cognition sur la cognition" — conscience et contrôle de ses propres processus mentaux.</div>
-    <div class="grid2">
-      <div class="box box-blue"><strong>Connaissances métacognitives</strong><br>Savoir comment on apprend, ses forces et faiblesses</div>
-      <div class="box box-purple"><strong>Régulation</strong><br>Contrôler et ajuster ses stratégies selon la situation</div>
-    </div>
-    <ul>
-      <li>Développe la flexibilité cognitive (Toscani)</li>
-      <li>Monitoring de l'erreur (Koriat)</li>
-      <li>Réduit les illusions de connaissance (Dunning-Kruger)</li>
-      <li>Effet très élevé sur la réussite scolaire (Hattie)</li>
-    </ul>
-    <div class="box box-yellow">⚠️ La capacité à verbaliser ses processus n'est pas également répartie → risque de creuser les inégalités si non explicite pour tous.</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>L'autorégulation</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Autorégulation</strong> = capacité à contrôler ses pensées, émotions et comportements pour s'adapter aux situations.</div>
-    <p><strong>Métacognition ≠ Autorégulation :</strong> l'autorégulation est plus large — elle intègre aussi la motivation et la volition (se mettre au travail, maintenir l'effort).</p>
-    <p>La métacognition est l'outil <strong>central</strong> de la régulation.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Les pauses actives — définition et intérêt</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="kterm"><strong>Pause active</strong> = 5 à 15 min, en classe, avec dimension ludique. Redonne aux élèves la possibilité de bouger.</div>
-    <p>La pause active passe par le <strong>corps</strong> → régule les émotions → libère le cerveau pour apprendre.</p>
-    <p><strong>Quand ?</strong> En début de journée (rituel), après le repas, ou spontanément selon les besoins.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Les 3 dimensions de l'autorégulation via les pauses actives</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="box box-yellow"><strong>🟠 Dimension comportementale</strong> (la plus impactée)<br><ul><li>Réduit les comportements hors-tâche (agitation, bavardages)</li><li>Améliore l'engagement après la pause</li><li>Module le niveau d'énergie</li></ul>Activités : yoga, étirements, danse, Just Dance</div>
-    <div class="box box-yellow"><strong>🟡 Dimension émotionnelle</strong><br><ul><li>Apaisement émotionnel observable</li><li>États affectifs plus positifs (plaisir, bien-être)</li><li>Meilleure gestion des frustrations</li></ul>Activités : mimer ses émotions, respiration en mouvement, musique entraînante</div>
-    <div class="box box-blue"><strong>🔵 Dimension cognitive</strong><br><ul><li>Regain d'attention et de concentration</li><li>Meilleure disponibilité mentale</li></ul>Activités : choisir la musique qui correspond à son état d'esprit</div>
-  </div></div>
-</div>
-
-<!-- CH8 -->
-<div class="page" id="ch8">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(45,212,191,.1);color:#2dd4bf;border:1px solid rgba(45,212,191,.2)">Chapitre 8</div>
-    <h1>Développement émotionnel et social</h1>
-    <p>Bowlby · Erikson · Vygotsky · Concept de soi · Attachement</p>
-  </div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Les 3 théories du développement émotionnel</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <table class="ctable">
-      <tr><th>Auteur</th><th>Théorie</th></tr>
-      <tr><td><strong>Bowlby</strong></td><td>L'attachement est un lien affectif <strong>inné et biologique</strong> qui assure la survie et structure les futures relations</td></tr>
-      <tr><td><strong>Erikson</strong></td><td><strong>8 stades psychosociaux</strong> (naissance à mort), chacun avec un défi (confiance vs méfiance, autonomie vs honte…)</td></tr>
-      <tr><td><strong>Vygotsky</strong></td><td>Le développement est <strong>d'abord social avant d'être individuel</strong> : interactions et langage façonnent le développement émotionnel</td></tr>
-    </table>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Théorie de l'attachement (Bowlby + Ainsworth)</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <p>Chaque enfant a un besoin fondamental de se sentir <strong>en sécurité</strong> auprès d'une figure d'attachement.</p>
-    <ul><li>Besoin satisfait → <strong>base de sécurité</strong> pour explorer le monde</li><li>Besoin insatisfait → problèmes relationnels à l'âge adulte</li></ul>
-    <p><strong>Types d'attachement (Ainsworth) :</strong> sécure, anxieux-ambivalent, évitant, désorganisé.</p>
-    <div class="box box-blue">💡 Pour l'enseignant : être une <strong>figure stable et bienveillante</strong>, instaurer un climat de classe rassurant.</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Le concept de soi</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <table class="ctable">
-      <tr><th>Composante</th><th>Définition</th><th>Exemple</th></tr>
-      <tr><td><strong>Image de soi</strong></td><td>Perception de son apparence et caractéristiques</td><td>"Je suis calme et organisé"</td></tr>
-      <tr><td><strong>Estime de soi</strong></td><td>Évaluation de sa propre valeur</td><td>"Je suis une bonne personne"</td></tr>
-      <tr><td><strong>Confiance en soi</strong></td><td>Croyance en ses capacités à réussir</td><td>"Je peux réussir cet examen"</td></tr>
-    </table>
-    <p>Ces composantes <strong>évoluent</strong> avec les expériences — elles ne sont pas figées.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Actions pédagogiques pour le développement émotionnel</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <ul>
-      <li>Créer un <strong>environnement sécurisant</strong> (Bowlby) : être une figure stable</li>
-      <li>Encourager l'autonomie et valoriser les erreurs comme apprentissage</li>
-      <li>Éviter la comparaison entre élèves — feedback sur l'effort (Erikson)</li>
-      <li>Favoriser les <strong>interactions sociales</strong> (travaux de groupe → Vygotsky)</li>
-      <li>Encourager les réussites pour construire la confiance en soi</li>
-    </ul>
-  </div></div>
-</div>
-
-<!-- CH9 -->
-<div class="page" id="ch9">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2)">Chapitre 9</div>
-    <h1>Motivation et Engagement</h1>
-    <p>Festinger · Dweck · Viau · Deci &amp; Ryan · Hattie &amp; Timperley</p>
-  </div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Comparaisons sociales de Festinger</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="grid2">
-      <div class="box box-green">⬆️ <strong>Comparaison ascendante</strong><br>Se comparer à quelqu'un de meilleur → peut motiver OU décourager</div>
-      <div class="box box-blue">⬇️ <strong>Comparaison descendante</strong><br>Se comparer à quelqu'un de moins bon → renforce l'estime de soi temporairement</div>
-    </div>
-    <div class="box box-green">✅ Valoriser les <strong>progrès personnels</strong> plutôt que la comparaison.</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Growth Mindset vs Fixed Mindset (Dweck)</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <table class="ctable">
-      <tr><th></th><th style="color:#4ade80">Growth Mindset ✅</th><th style="color:#f87171">Fixed Mindset ❌</th></tr>
-      <tr><td>Croyance</td><td>Intelligence se développe avec l'effort</td><td>Intelligence fixe et innée</td></tr>
-      <tr><td>Face à l'échec</td><td>Occasion d'apprendre</td><td>Preuve de manque de capacité</td></tr>
-      <tr><td>Défis</td><td>Cherchés, stimulants</td><td>Évités (peur d'échouer)</td></tr>
-    </table>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Les ingrédients de la motivation (Viau, 1994)</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <ol>
-      <li><strong>Perception de la valeur</strong> : "Est-ce que ça vaut la peine ?" (Eccles &amp; Wigfield)</li>
-      <li><strong>Perception de la compétence</strong> : "Est-ce que je suis capable ?" (Bandura)</li>
-      <li><strong>Perception de la contrôlabilité</strong> : "Est-ce que j'ai du contrôle ?" (Weiner)</li>
-    </ol>
-    <p>→ Produisent : choix de s'engager, persévérance, performance.</p>
-    <div class="box box-purple">4 contextes extérieurs : classe (activité, enseignant, climat) · vie de l'étudiant (famille, amis) · institution (règlements) · société (valeurs, emploi).</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Motivation intrinsèque vs extrinsèque (Deci & Ryan)</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <table class="ctable">
-      <tr><th>Type</th><th>Définition</th><th>Valeur</th></tr>
-      <tr><td><strong>Intrinsèque</strong></td><td>Motivé par l'activité elle-même (plaisir, curiosité)</td><td><span class="cpill cpill-green">La plus bénéfique</span></td></tr>
-      <tr><td><strong>Introjectée</strong></td><td>Pour éviter la honte ou la culpabilité</td><td><span class="cpill cpill-yellow">Intermédiaire</span></td></tr>
-      <tr><td><strong>Identifiée</strong></td><td>Pour atteindre un but personnel valorisé</td><td><span class="cpill cpill-yellow">Intermédiaire</span></td></tr>
-      <tr><td><strong>Extrinsèque</strong></td><td>Pour une récompense ou éviter une punition</td><td><span class="cpill cpill-red">Moins durable</span></td></tr>
-    </table>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Feedbacks de Hattie & Timperley</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="grid2">
-      <div class="box box-blue"><strong>Feed-up</strong><br>"Où vais-je ?" → clarifier l'objectif</div>
-      <div class="box box-green"><strong>Feed-back</strong><br>"Où en suis-je ?" → état actuel</div>
-    </div>
-    <div class="box box-purple"><strong>Feed-forward</strong> : "Où dois-je aller ensuite ?" → prochaine étape</div>
-    <table class="ctable">
-      <tr><th>Niveau</th><th>Valeur</th></tr>
-      <tr><td>Sur la tâche</td><td><span class="cpill cpill-yellow">Utile</span></td></tr>
-      <tr><td>Sur le processus</td><td><span class="cpill cpill-green">Très utile ✅</span></td></tr>
-      <tr><td>Sur l'autorégulation</td><td><span class="cpill cpill-green">Très utile ✅</span></td></tr>
-      <tr><td>Sur le personnel ("Tu es intelligent")</td><td><span class="cpill cpill-red">À éviter ❌</span></td></tr>
-    </table>
-    <div class="box box-green">✅ <strong>Exemple :</strong> Élève avec bonne structure mais fautes d'orthographe :<br>
-    • Feed-up : "L'objectif = texte clair — tu l'as atteint !"<br>
-    • Feed-back : "Ta structure est très bien construite."<br>
-    • Feed-forward : "Essaie de relire phrase par phrase à voix haute."<br>
-    • Autorégulation : "Qu'est-ce que tu changerais si tu le réécrivais ?"</div>
-  </div></div>
-</div>
-
-<!-- CH10 -->
-<div class="page" id="ch10">
-  <div class="ph">
-    <div class="ph-tag" style="background:rgba(192,132,252,.1);color:#c084fc;border:1px solid rgba(192,132,252,.2)">Chapitre 10</div>
-    <h1>Théories de l'apprentissage</h1>
-    <p>Transmission · Béhaviorisme · Cognitivisme · Constructivisme · Socioconstructivisme · Connectivisme</p>
-  </div>
-
-  <div style="overflow-x:auto;margin-bottom:16px">
-  <table class="ctable" style="min-width:600px">
-    <tr><th>Théorie</th><th>Auteurs</th><th>Définition</th><th>Erreur</th></tr>
-    <tr><td><strong>Transmission</strong></td><td>Locke (1693)</td><td>Apprendre = recevoir. Élève passif = page blanche.</td><td><span class="cpill cpill-red">À éradiquer</span></td></tr>
-    <tr><td><strong>Béhaviorisme</strong></td><td>Watson, Pavlov, Skinner</td><td>Apprendre = modifier son comportement. Stimulus → réponse.</td><td><span class="cpill cpill-red">Négative</span></td></tr>
-    <tr><td><strong>Cognitivisme</strong></td><td>Atkinson, Dehaene</td><td>Apprendre = traiter, interpréter, stocker. Cerveau = ordinateur.</td><td><span class="cpill cpill-yellow">À analyser</span></td></tr>
-    <tr><td><strong>Constructivisme</strong></td><td>Piaget (1950)</td><td>Apprendre = construire ses connaissances. Assimilation/Accommodation.</td><td><span class="cpill cpill-green">Révélatrice ✅</span></td></tr>
-    <tr><td><strong>Socioconstructivisme</strong></td><td>Vygotsky (1960)</td><td>Apprendre = construire avec autrui. ZPD, conflit socio-cognitif.</td><td><span class="cpill cpill-green">Retravaillée ✅</span></td></tr>
-    <tr><td><strong>Connectivisme</strong></td><td>Siemens, Downes (2005)</td><td>Apprendre = créer des connexions. Ère numérique.</td><td><span class="cpill cpill-yellow">Distribuée</span></td></tr>
-  </table>
-  </div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Quelle est la meilleure approche aujourd'hui ?</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <div class="box box-green">✅ <strong>Approche actuelle :</strong> socioconstructiviste, enrichie des neurosciences (4 piliers de Dehaene) et du travail des FE. L'élève construit ses connaissances avec les autres, dans des situations contextualisées, avec des feedbacks formatifs réguliers.</div>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Béhaviorisme — détail</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <p>Schéma : <strong>Stimulus → Boîte noire → Réponse</strong>. Rôle de l'enseignant = trouver les bons stimuli + renforcements.</p>
-    <p>Héritage : la <strong>Pédagogie Par Objectifs (PPO)</strong>.</p>
-  </div></div>
-
-  <div class="acc"><button class="acc-btn" onclick="tog(this)"><span>Socioconstructivisme — détail</span><span class="acc-icon">▼</span></button>
-  <div class="acc-body">
-    <ul>
-      <li>Ajoute la <strong>dimension sociale</strong> au constructivisme de Piaget</li>
-      <li><strong>ZPD</strong> = zone cible de l'enseignant</li>
-      <li><strong>Conflit socio-cognitif</strong> = confrontation d'avis divergents entre pairs → moteur d'apprentissage</li>
-      <li>Méthodes : travaux de groupe, tutorat, évaluation entre pairs</li>
-    </ul>
-  </div></div>
-</div>
-
-<!-- EXAM -->
-<div class="page" id="exam-page">
-  <div id="exam-start">
-    <div class="exam-hero">
-      <h2>Simuler l'<span>examen</span></h2>
-      <p>46 questions sur toute la matière du cours 1302<br>Réponds aux QCM, lis les explications, analyse tes erreurs.</p>
-      <div class="config-row">
-        <div class="config-group">
-          <label>Nombre de questions</label>
-          <div class="config-pills">
-            <button class="cpill-btn sel" onclick="setN(this,10)">10</button>
-            <button class="cpill-btn" onclick="setN(this,20)">20</button>
-            <button class="cpill-btn" onclick="setN(this,46)">Tout (46)</button>
-          </div>
+    <header class="bg-white border-b border-gray-200 py-6 px-4">
+        <div class="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-2.5 py-1 rounded-md">Contenu Strict de l'Image</span>
+                <h1 class="text-xl font-black text-gray-950 mt-1">U1207 • Le Kit de Survie (Objectifs Uniques)</h1>
+                <p class="text-xs text-gray-500">Ici, on n'étudie que ce qui est écrit sur ta feuille d'objectifs.</p>
+            </div>
+            <div class="bg-blue-600 text-white font-bold rounded-xl px-4 py-2 text-xs shadow-sm">
+                Focus Examen
+            </div>
         </div>
-        <div class="config-group">
-          <label>Chronomètre</label>
-          <div class="config-pills">
-            <button class="cpill-btn sel" onclick="setT(this,0)">Sans</button>
-            <button class="cpill-btn" onclick="setT(this,15)">15 min</button>
-            <button class="cpill-btn" onclick="setT(this,30)">30 min</button>
-          </div>
+    </header>
+
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-3xl mx-auto px-4 flex justify-between text-center overflow-x-auto">
+            <button onclick="switchTab('obj1')" id="btn-obj1" class="tab-btn py-4 flex-1 text-xs font-bold border-b-2 border-blue-600 text-blue-600 active">
+                1. Concepts du Temps
+            </button>
+            <button onclick="switchTab('obj2')" id="btn-obj2" class="tab-btn py-4 flex-1 text-xs font-medium border-b-2 border-transparent text-gray-500 hover:text-blue-600">
+                2. Siècles & Périodes
+            </button>
+            <button onclick="switchTab('obj3')" id="btn-obj3" class="tab-btn py-4 flex-1 text-xs font-medium border-b-2 border-transparent text-gray-500 hover:text-blue-600">
+                3. Analyse de Documents
+            </button>
         </div>
-      </div>
-      <button class="start-btn" onclick="startExam()">Commencer →</button>
-    </div>
-  </div>
+    </nav>
 
-  <div id="exam-quiz">
-    <div class="qhud">
-      <span class="qprog-text" id="qprogress">Question 1/10</span>
-      <span class="qtimer" id="qtimer" style="display:none">⏱ 15:00</span>
-    </div>
-    <div class="qpbar"><div class="qpfill" id="qfill"></div></div>
-    <div class="qcard">
-      <div class="qnum-badge" id="qnum">Question 1</div>
-      <div class="qtext" id="qtext"></div>
-      <div class="opts" id="qopts"></div>
-      <div class="expl-box" id="qexpl"></div>
-      <div class="q-footer">
-        <button class="next-btn" id="qnext" onclick="nextQ()">Suivant →</button>
-      </div>
-    </div>
-  </div>
+    <main class="flex-grow max-w-3xl w-full mx-auto p-4 sm:p-6 space-y-6">
 
-  <div id="exam-result">
-    <div class="score-ring" id="scoreRing">
-      <div class="snum" id="scoreNum">0</div>
-      <div class="stot" id="scoreTot">/10</div>
-    </div>
-    <div class="res-title" id="resultMsg"></div>
-    <div class="res-sub" id="resultSub"></div>
-    <div class="res-btns">
-      <button class="btn-restart" onclick="restartExam()">🔄 Recommencer</button>
-      <button class="btn-home" onclick="goTo('home')">🏠 Accueil</button>
-    </div>
-    <div class="review-title">Révision des réponses</div>
-    <div id="reviewList"></div>
-  </div>
-</div>
+        <div id="tab-obj1" class="tab-content active space-y-6">
+            <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-950">
+                <strong>Explication du prof :</strong> Cette partie teste ta capacité à comprendre comment un enfant de primaire se situe dans le temps et comment l'instituteur doit structurer ses leçons d'histoire.
+            </div>
 
-</div><!-- end #main -->
+            <div class="bg-white border border-gray-200 rounded-xl p-6 space-y-4 shadow-sm">
+                <h3 class="text-sm font-black uppercase tracking-wider text-blue-600 border-b pb-2">Les notions à restituer :</h3>
+                
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <strong class="text-gray-950 block mb-1">• Temps vécu vs Temps conçu vs Temps historique</strong>
+                        <p class="text-gray-600 text-xs pl-3 border-l-2 border-gray-300">
+                            - <strong>Temps vécu (Maternelle-P2) :</strong> C'est le temps biologique et inconscient. L'enfant n'a pas de montre, il se repère par ses actions ("après la récré", "pendant le dîner").<br>
+                            - <strong>Temps conçu (Dès la P3) :</strong> L'enfant utilise enfin des outils construits pour mesurer le temps (heures, calendriers, frises). C'est un temps abstrait et mathématique.<br>
+                            - <strong>Temps historique :</strong> Le temps très lointain qui s'est déroulé avant la naissance de l'enfant et qui nécessite des repères collectifs.
+                        </p>
+                    </div>
 
-<script>
-// ── NAV ──
-function goTo(tab){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.sb-btn,.mob-btn,.sb-exam-btn').forEach(b=>b.classList.remove('active'));
-  const id = tab==='exam' ? 'exam-page' : tab;
-  const el = document.getElementById(id);
-  if(el) el.classList.add('active');
-  document.querySelectorAll(`[data-tab="${tab}"]`).forEach(b=>b.classList.add('active'));
-  window.scrollTo(0,0);
-}
-document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>goTo(b.dataset.tab));
+                    <div>
+                        <strong class="text-gray-950 block mb-1">• La Décentration</strong>
+                        <p class="text-gray-600 text-xs pl-3 border-l-2 border-gray-300">
+                            C'est l'action pour un élève de sortir de sa propre ligne du temps personnelle. Il comprend que le monde existait avant lui et qu'il y a eu un passé sans sa présence.
+                        </p>
+                    </div>
 
-// ── ACCORDION ──
-function tog(btn){
-  btn.classList.toggle('open');
-  btn.nextElementSibling.classList.toggle('show');
-}
+                    <div>
+                        <strong class="text-gray-950 block mb-1">• Repère temporel vs Représentation du temps</strong>
+                        <p class="text-gray-600 text-xs pl-3 border-l-2 border-gray-300">
+                            - Le <strong>repère</strong> est l'événement historique brut (ex: la construction d'un château fort).<br>
+                            - La <strong>représentation</strong> est l'outil visuel utilisé pour afficher ce repère (ex: une frise chronologique linéaire).
+                        </p>
+                    </div>
 
-// ── QCM DATA ──
-const ALL_QS=[
-  {q:"Selon Piaget, quelle est la relation entre apprentissage et développement ?",opts:["Le développement précède l'apprentissage","L'apprentissage précède le développement","Ils se produisent simultanément","L'apprentissage n'influence pas le développement"],a:0,expl:"Chez Piaget, le développement PRÉCÈDE l'apprentissage. On ne peut pas enseigner avant que l'enfant soit biologiquement prêt."},
-  {q:"Qu'est-ce que l'assimilation selon Piaget ?",opts:["Modifier ses schèmes pour s'adapter","Intégrer une info dans un schème existant sans le modifier","Créer des schèmes entièrement nouveaux","Rejeter les informations contradictoires"],a:1,expl:"L'assimilation = intégrer le nouveau dans ce qu'on connaît déjà, sans changer la structure cognitive."},
-  {q:"Qu'est-ce que l'accommodation selon Piaget ?",opts:["Intégrer une info dans un schème existant","Modifier ses schèmes pour s'adapter à une réalité nouvelle","Oublier des informations anciennes","Se mettre à la place d'autrui"],a:1,expl:"L'accommodation = modifier sa structure cognitive pour s'adapter à quelque chose de nouveau."},
-  {q:"Pour Vygotsky, quel est le moteur principal du développement ?",opts:["L'action individuelle de l'enfant","La maturation biologique","Les interactions sociales et la culture","Le jeu solitaire"],a:2,expl:"Vygotsky met en avant les interactions sociales et la culture, contrairement à Piaget (action individuelle)."},
-  {q:"Que signifie ZPD ?",opts:["Zone de Progrès Durable","Zone Proximale de Développement","Zone de Pratique Directe","Zone de Pensée Divergente"],a:1,expl:"ZPD = Zone Proximale de Développement = l'écart entre ce que l'enfant peut faire seul et avec aide."},
-  {q:"Quel stade de Piaget correspond à la période 7-11 ans ?",opts:["Sensorimoteur","Préopératoire","Opérations concrètes","Opérations formelles"],a:2,expl:"Les opérations concrètes (7-11 ans) : logique concrète, conservation, décentration."},
-  {q:"Dans quel stade de Piaget l'enfant développe-t-il la permanence de l'objet ?",opts:["Préopératoire","Sensorimoteur","Opérations concrètes","Opérations formelles"],a:1,expl:"La permanence de l'objet se développe vers 8-9 mois, dans le stade sensorimoteur (0-2 ans)."},
-  {q:"Quel point commun ont Piaget et Vygotsky ?",opts:["Ils pensent tous deux que l'apprentissage précède le développement","Ils sont tous deux constructivistes","Ils accordent tous deux un rôle central au langage","Ils pensent tous deux que le développement est uniquement biologique"],a:1,expl:"Les deux sont constructivistes : l'enfant construit activement ses connaissances en interagissant avec l'environnement."},
-  {q:"Quelles sont les 3 fonctions exécutives principales ?",opts:["Attention, mémoire, perception","Inhibition, flexibilité cognitive, mémoire de travail","Lecture, écriture, calcul","Motivation, engagement, consolidation"],a:1,expl:"Les 3 FE : inhibition, flexibilité cognitive, mémoire de travail."},
-  {q:"Que mesure concrètement le test du marshmallow ?",opts:["La flexibilité cognitive","La mémoire de travail","L'inhibition (résister à la tentation)","La créativité"],a:2,expl:"Le test du marshmallow mesure l'inhibition : résister à une récompense immédiate pour en obtenir une plus grande."},
-  {q:"Quelle est l'approche préférable pour travailler les FE ?",opts:["Les enseigner directement via des cours spécifiques","Les lier à un apprentissage disciplinaire en contexte réel","Les travailler uniquement en dehors de la classe","Attendre que l'enfant les développe naturellement"],a:1,expl:"Les FE ne s'enseignent pas directement. Elles se développent dans le contexte, liées à un apprentissage disciplinaire."},
-  {q:"Qu'est-ce que l'empan mnésique ?",opts:["La durée de la mémoire à long terme","Le nombre d'informations maintenues simultanément en mémoire de travail","Le type de mémoire pour les automatismes","La capacité à oublier"],a:1,expl:"L'empan mnésique = nombre d'informations maintenues simultanément. Un adulte retient environ 7 éléments."},
-  {q:"La flexibilité cognitive, c'est :",opts:["Résister à une réponse automatique","Passer d'un comportement à un autre selon les exigences","Maintenir des infos en mémoire tout en opérant une tâche","Mémoriser des séquences longues"],a:1,expl:"Flexibilité cognitive = capacité à changer de stratégie face à une situation nouvelle."},
-  {q:"Quels sont les 4 piliers de l'apprentissage selon Dehaene ?",opts:["Attention, mémoire, lecture, écriture","Attention, engagement actif, retour d'information, consolidation","Éveil, perception, motivation, évaluation","Inhibition, flexibilité, mémoire, attention"],a:1,expl:"Les 4 piliers de Dehaene : 1. Attention, 2. Engagement actif, 3. Retour d'information, 4. Consolidation."},
-  {q:"Que démontre la 'cécité inattentionnelle' ?",opts:["Que certains élèves ont des problèmes de vue","Quand on est concentré, des stimuli non pertinents peuvent devenir invisibles","Que l'attention est infinie","Que le multitâche est possible"],a:1,expl:"Cécité inattentionnelle : quand on est engagé dans une tâche, les stimuli non pertinents deviennent littéralement invisibles."},
-  {q:"Comment le cerveau apprend-il de l'erreur ?",opts:["Il ne peut pas apprendre de l'erreur","Le signal d'erreur déclenche la plasticité cérébrale","L'erreur bloque l'apprentissage","L'erreur n'a aucun impact sur la mémoire"],a:1,expl:"Quand un élève se trompe, le signal d'erreur déclenche la plasticité cérébrale → apprentissage."},
-  {q:"Que signifie 'distribuer les apprentissages' ?",opts:["Donner des notes à tous les élèves","Faire plusieurs petites sessions d'étude plutôt que de grandes sessions rares","Partager les cours entre enseignants","Distribuer des fiches résumé"],a:1,expl:"Distribuer = étaler sur plusieurs jours. Le sommeil consolide chaque nuit. Plusieurs petites sessions > deux grosses journées."},
-  {q:"Quelles sont les 4 étapes de la mémoire dans l'ordre ?",opts:["Attention, stockage, consolidation, oubli","Encodage, stockage, encodage/consolidation, restitution","Perception, mémorisation, rappel, oubli","Encodage, récupération, stockage, perception"],a:1,expl:"Dans l'ordre : 1. Encodage, 2. Stockage court terme, 3. Consolidation long terme, 4. Restitution."},
-  {q:"La mémoire procédurale, c'est :",opts:["Les souvenirs personnels vécus","Les connaissances générales","Les gestes et automatismes (faire du vélo, écrire)","Les émotions liées aux expériences"],a:2,expl:"Mémoire procédurale = mémoire implicite des gestes automatiques."},
-  {q:"Lequel de ces éléments est un neuromythe ?",opts:["Le sommeil consolide la mémoire","On n'utilise que 10% de notre cerveau","La plasticité cérébrale existe toute la vie","L'attention est une ressource limitée"],a:1,expl:"'On n'utilise que 10% de son cerveau' est un neuromythe. Toutes les zones du cerveau ont une fonction."},
-  {q:"Que sont les styles d'apprentissage VAK ?",opts:["Une méthode validée par les neurosciences","Un neuromythe sans base scientifique","Une théorie de Piaget","Un type de mémoire à long terme"],a:1,expl:"Les styles VAK sont un neuromythe. Il n'existe pas de preuve scientifique que les élèves apprennent mieux selon un 'style' fixe."},
-  {q:"Qu'est-ce que la plasticité cérébrale ?",opts:["La résistance du cerveau aux apprentissages","La capacité du cerveau à se réorganiser en créant et supprimant des connexions","La rigidité des circuits neuronaux","La capacité du cerveau à fonctionner sans sommeil"],a:1,expl:"Plasticité cérébrale = capacité du cerveau à se réorganiser tout au long de la vie, en réponse aux expériences."},
-  {q:"Jusqu'à quel âge la maturation cérébrale de l'adolescent se poursuit-elle ?",opts:["16-17 ans","18-20 ans","25-30 ans","12-13 ans"],a:2,expl:"Le cerveau adolescent continue de se reconfigurer jusqu'à 25-30 ans, notamment le cortex préfrontal."},
-  {q:"Quel processus consiste en l'élimination des connexions peu utilisées à l'adolescence ?",opts:["Myélinisation","Élagage synaptique","Plasticité cérébrale","Consolidation"],a:1,expl:"L'élagage synaptique = suppression des connexions peu utilisées pour renforcer les circuits utiles."},
-  {q:"Quel mythe sur l'adolescent faut-il déconstruire ?",opts:["Le cerveau ado a une plasticité exceptionnelle","Les comportements ados sont principalement causés par les hormones","Le cortex préfrontal est immature","Les ados ont besoin de sens"],a:1,expl:"Attribuer les comportements aux hormones est inexact : c'est la reconfiguration neurologique qui en est la cause principale."},
-  {q:"Qu'est-ce qu'un biais cognitif ?",opts:["Une erreur volontaire de raisonnement","Un raccourci mental inconscient pouvant causer des erreurs de jugement","Une stratégie pédagogique","Un type de mémoire implicite"],a:1,expl:"Un biais cognitif est un raccourci mental inconscient qui facilite le traitement rapide de l'information mais peut causer des erreurs."},
-  {q:"Qu'est-ce que le biais de confirmation ?",opts:["Tendance à changer d'avis facilement","Tendance à privilégier les infos qui confirment nos croyances existantes","Tendance à se souvenir des échecs uniquement","Tendance à surestimer ses capacités"],a:1,expl:"Biais de confirmation (Peter Wason) = on privilégie les infos qui confirment nos croyances et minimise les autres."},
-  {q:"Que sont le Système 1 et le Système 2 selon Kahneman ?",opts:["Deux types de mémoire à long terme","S1 = rapide/intuitif/émotionnel ; S2 = lent/analytique/réflexif","Deux stades de développement cognitif","Deux types d'attention"],a:1,expl:"Kahneman : S1 = rapide, intuitif, émotionnel (source des biais) ; S2 = lent, analytique, réflexif."},
-  {q:"Quelle solution l'enseignant peut-il utiliser pour limiter l'effet Halo lors des corrections ?",opts:["Corriger sans lire le nom","Utiliser des grilles d'évaluation critériées","Ne pas corriger les fautes","Toujours corriger dans le même ordre"],a:1,expl:"Des grilles d'évaluation critériées permettent de se concentrer sur des critères précis et limiter l'effet Halo."},
-  {q:"Qu'est-ce que la métacognition ?",opts:["La mémoire des faits généraux","La conscience et le contrôle de ses propres processus mentaux","Un type de biais cognitif","Une technique de relaxation"],a:1,expl:"Métacognition = 'cognition sur la cognition' : penser sur sa propre façon de penser et d'apprendre."},
-  {q:"Quelle est la différence entre pause active et pause métacognitive ?",opts:["Il n'y a aucune différence","Pause active = corps (bouger) ; pause métacognitive = cerveau (réfléchir sur sa pensée)","Pause active = individuelle ; pause métacognitive = collective","Pause active = longue ; pause métacognitive = courte"],a:1,expl:"IMPORTANT : Pause active = prise de possession du CORPS. Pause métacognitive = arrêt sur image sur sa PENSÉE."},
-  {q:"Sur quelles 3 dimensions les pauses actives favorisent-elles l'autorégulation ?",opts:["Cognitive, sociale, émotionnelle","Comportementale, émotionnelle, cognitive","Motrice, verbale, visuelle","Attentionnelle, mnésique, exécutive"],a:1,expl:"Les 3 dimensions des pauses actives : comportementale (la plus impactée), émotionnelle, et cognitive."},
-  {q:"Quelle dimension des pauses actives est la plus impactée ?",opts:["Cognitive","Émotionnelle","Comportementale","Sociale"],a:2,expl:"La dimension comportementale est la plus impactée : réduction des comportements hors-tâche, meilleur engagement, modulation de l'énergie."},
-  {q:"Selon Bowlby, qu'est-ce que l'attachement ?",opts:["Un apprentissage culturel","Un lien affectif inné et biologique qui assure la survie et structure les futures relations","Une théorie du développement cognitif","Un mécanisme de défense"],a:1,expl:"Bowlby : l'attachement est un lien affectif inné et biologique qui assure la survie et structure les futures relations."},
-  {q:"Quelles sont les 3 composantes du concept de soi ?",opts:["Image de soi, estime de soi, confiance en soi","Attention, mémoire, motivation","Inhibition, flexibilité, mémoire de travail","Émotions, comportements, pensées"],a:0,expl:"Concept de soi = image de soi (apparence), estime de soi (valeur), confiance en soi (capacités à réussir)."},
-  {q:"Selon Erikson, combien y a-t-il de stades psychosociaux ?",opts:["4","6","8","10"],a:2,expl:"Erikson décrit 8 stades psychosociaux allant de la naissance à la mort."},
-  {q:"Quels sont les 3 ingrédients de la motivation selon Viau (1994) ?",opts:["Attention, mémoire, feedback","Perception de la valeur, de la compétence, de la contrôlabilité","Growth mindset, motivation intrinsèque, engagement","Feedback, autonomie, appartenance"],a:1,expl:"Viau (1994) : 3 perceptions — valeur de la tâche (Eccles), compétence (Bandura), contrôlabilité (Weiner)."},
-  {q:"Quel type de feedback Hattie considère-t-il comme à éviter ?",opts:["Feedback sur la tâche","Feedback sur le processus","Feedback sur l'autorégulation","Feedback sur le personnel ('tu es intelligent')"],a:3,expl:"Le feedback sur le personnel est à éviter : peut renforcer un mindset fixe et bloquer l'apprentissage en cas d'échec."},
-  {q:"Qu'est-ce que le growth mindset selon Dweck ?",opts:["La croyance que l'intelligence est fixe et innée","La croyance que l'intelligence se développe avec l'effort","Une méthode de relaxation","Un type de biais cognitif"],a:1,expl:"Growth mindset (Dweck) = l'intelligence se développe avec l'effort. L'échec = occasion d'apprendre."},
-  {q:"Selon Deci & Ryan, quelle est la motivation la plus bénéfique ?",opts:["La motivation extrinsèque (récompenses)","La motivation introjectée (éviter la honte)","La motivation intrinsèque (intérêt pour l'activité)","La motivation identifiée (but personnel)"],a:2,expl:"La motivation intrinsèque (curiosité, plaisir) est la plus bénéfique et la plus durable."},
-  {q:"Quelle théorie est associée à Skinner et Pavlov ?",opts:["Constructivisme","Cognitivisme","Béhaviorisme","Connectivisme"],a:2,expl:"Le béhaviorisme (Watson, Pavlov, Skinner) : apprendre = modifier son comportement. Stimulus → réponse."},
-  {q:"Quelle théorie affirme 'apprendre, c'est construire avec autrui' ?",opts:["Béhaviorisme","Constructivisme","Socioconstructivisme","Cognitivisme"],a:2,expl:"Le socioconstructivisme (Vygotsky) : apprendre = construire ses connaissances AVEC autrui."},
-  {q:"Dans quelle théorie l'élève est-il vu comme une 'page blanche' ?",opts:["Constructivisme","Socioconstructivisme","Béhaviorisme","Transmission (Locke)"],a:3,expl:"La théorie de la transmission (Locke) : élève passif = 'page blanche' qui reçoit les savoirs."},
-  {q:"Qu'est-ce que la PPO ?",opts:["Un héritage du socioconstructivisme","Un héritage du béhaviorisme","Une méthode Montessori","Une approche neuroscientifique"],a:1,expl:"La Pédagogie Par Objectifs (PPO) est un héritage direct du béhaviorisme."},
-  {q:"Selon les neurosciences, comment fonctionne le 'recyclage neuronal' ?",opts:["Le cerveau détruit ses anciens circuits","Les apprentissages culturels réutilisent des circuits cérébraux existants","Le cerveau repart de zéro à chaque apprentissage","Le sommeil efface les anciens circuits"],a:1,expl:"Le recyclage neuronal (Dehaene) : les apprentissages culturels (lecture, arithmétique) réutilisent des circuits cérébraux existants."},
-  {q:"Quelle est la capacité de rétention de la mémoire à long terme ?",opts:["Environ 7 éléments","Moins d'1 minute","Quelques secondes","Quasi illimitée"],a:3,expl:"La mémoire à long terme est considérée comme ayant une capacité quasi illimitée. Elle peut durer des jours, mois, années ou toute une vie."},
-  {q:"Pourquoi les FE sont-elles décrites comme 'de haut niveau' ?",opts:["Car elles concernent uniquement les adultes","Car elles sont coûteuses cognitivement, limitées et requièrent un effort conscient","Car elles sont localisées dans le cortex visuel","Car elles remplacent toutes les autres fonctions cognitives"],a:1,expl:"Les FE sont coûteuses cognitivement, à disponibilité limitée et nécessitent un effort conscient, contrairement aux fonctions automatiques bas niveau."},
-];
+                    <div>
+                        <strong class="text-gray-950 block mb-1">• Rétrospection vs Diachronie</strong>
+                        <p class="text-gray-600 text-xs pl-3 border-l-2 border-gray-300">
+                            - La <strong>rétrospection</strong> est la méthode de départ : on part d'une question d'aujourd'hui pour regarder en arrière dans le passé.<br>
+                            - La <strong>diachronie</strong> consiste à suivre le fil du temps dans le sens normal pour observer l'évolution, les changements (ruptures) et ce qui reste identique (continuités).
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-let examN=10,examT=0,curQ=0,score=0,questions=[],answers=[],timerInterval=null,timeLeft=0;
+            <div class="bg-slate-900 text-white rounded-xl p-5 space-y-4">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Vérification immédiate</span>
+                <p class="text-xs font-medium">Si tu demandes à un enfant d'analyser l'évolution des moyens de transport de 1900 à nos jours en insistant sur l'apparition du moteur, tu travailles en :</p>
+                <div class="grid grid-cols-1 gap-2">
+                    <button onclick="checkAnswer(1, 0, this)" class="text-left p-3 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">En démarche de rétrospection pure.</button>
+                    <button onclick="checkAnswer(1, 1, this)" class="text-left p-3 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">En diachronie (on suit l'évolution linéaire et la rupture du moteur).</button>
+                </div>
+                <div id="feedback-1" class="text-xs p-3 rounded-lg hidden"></div>
+            </div>
+        </div>
 
-function setN(btn,n){
-  btn.closest('.config-pills').querySelectorAll('.cpill-btn').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');examN=n;
-}
-function setT(btn,t){
-  btn.closest('.config-pills').querySelectorAll('.cpill-btn').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');examT=t;
-}
-function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
+        <div id="tab-obj2" class="tab-content space-y-6">
+            <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-950">
+                <strong>Explication du prof :</strong> À l'examen, tu as l'obligation de savoir calculer le siècle d'une date sans te tromper, et de connaître les limites des 5 grandes périodes.
+            </div>
 
-function startExam(){
-  questions=shuffle(ALL_QS).slice(0,Math.min(examN,ALL_QS.length));
-  answers=[];curQ=0;score=0;
-  document.getElementById('exam-start').style.display='none';
-  document.getElementById('exam-result').style.display='none';
-  document.getElementById('exam-quiz').style.display='block';
-  const timer=document.getElementById('qtimer');
-  if(examT>0){
-    timeLeft=examT*60;timer.style.display='block';
-    timer.textContent='⏱ '+fmt(timeLeft);
-    timerInterval=setInterval(()=>{
-      timeLeft--;timer.textContent='⏱ '+fmt(timeLeft);
-      if(timeLeft<=0){clearInterval(timerInterval);showResult();}
-    },1000);
-  } else timer.style.display='none';
-  showQ();
-}
-function fmt(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60}
+            <div class="bg-white border border-gray-200 rounded-xl p-6 space-y-4 shadow-sm">
+                <h3 class="text-sm font-black uppercase tracking-wider text-blue-600 border-b pb-2">Les règles incontournables :</h3>
+                
+                <div class="space-y-4 text-sm leading-relaxed">
+                    <div class="p-3 bg-gray-50 rounded-lg">
+                        <strong class="text-blue-700 block text-xs uppercase mb-1">La Règle Générale : Faire (+1)</strong>
+                        Tu prends le nombre de centaines (les premiers chiffres de la date) et tu ajoutes <strong>+1</strong>.<br>
+                        • Exemple : l'année <strong>14</strong>92 &rarr; 14 centaines + 1 = 15. C'est le **XV<sup>e</sup> siècle**.
+                    </div>
 
-function showQ(){
-  const q=questions[curQ];
-  document.getElementById('qnum').textContent='Question '+(curQ+1)+' / '+questions.length;
-  document.getElementById('qprogress').textContent='Question '+(curQ+1)+' / '+questions.length;
-  document.getElementById('qfill').style.width=((curQ/questions.length)*100)+'%';
-  document.getElementById('qtext').textContent=q.q;
-  document.getElementById('qexpl').classList.remove('show');
-  document.getElementById('qnext').style.display='none';
-  const opts=document.getElementById('qopts');
-  const so=q.opts.map((o,i)=>({o,i})).sort(()=>Math.random()-.5);
-  opts.innerHTML='';
-  so.forEach(({o,i})=>{
-    const b=document.createElement('button');
-    b.className='opt';b.textContent=o;b.dataset.real=i;
-    b.onclick=function(){answerQ(this,q,so)};
-    opts.appendChild(b);
-  });
-}
+                    <div class="p-3 bg-red-50 border border-red-200 rounded-lg">
+                        <strong class="text-red-700 block text-xs uppercase mb-1">L'Exception : Les doubles zéros (00)</strong>
+                        Si la date se termine exactement par deux zéros, **tu ne fais pas +1**. Tu gardes juste le nombre de centaines.<br>
+                        • Exemple : l'année <strong>15</strong>00 &rarr; se termine par 00. C'est le **XV<sup>e</sup> siècle** (et pas le XVIe !).
+                    </div>
 
-function answerQ(btn,q){
-  const chosen=parseInt(btn.dataset.real);
-  document.querySelectorAll('.opt').forEach(b=>b.classList.add('answered'));
-  if(chosen===q.a){btn.classList.add('correct');score++;}
-  else{
-    btn.classList.add('wrong');
-    document.querySelectorAll('.opt').forEach(b=>{if(parseInt(b.dataset.real)===q.a)b.classList.add('show-correct');});
-  }
-  answers.push({q:q.q,correct:chosen===q.a,yourAns:q.opts[chosen],rightAns:q.opts[q.a]});
-  const ex=document.getElementById('qexpl');
-  ex.textContent='💡 '+q.expl;ex.classList.add('show');
-  const nb=document.getElementById('qnext');
-  nb.style.display='block';
-  nb.textContent=curQ<questions.length-1?'Suivant →':'Voir les résultats';
-}
+                    <div class="p-3 bg-gray-50 rounded-lg">
+                        <strong class="text-indigo-700 block text-xs uppercase mb-1">Les 5 Périodes Obligatoires</strong>
+                        1. <strong>Préhistoire :</strong> Des origines à l'écriture (vers -3500 av. J.-C.).<br>
+                        2. <strong>Antiquité :</strong> De -3500 à la chute de Rome (476 apr. J.-C.).<br>
+                        3. <strong>Moyen Âge :</strong> De 476 à la découverte de l'Amérique (1492).<br>
+                        4. <strong>Temps Modernes :</strong> De 1492 à la Révolution Française (1789).<br>
+                        5. <strong>Époque Contemporaine :</strong> De 1789 à aujourd'hui.
+                    </div>
+                </div>
+            </div>
 
-function nextQ(){curQ++;if(curQ>=questions.length)showResult();else showQ();}
+            <div class="bg-slate-900 text-white rounded-xl p-5 space-y-4">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Vérification immédiate</span>
+                <p class="text-xs font-medium">À quel siècle appartient l'année 800 apr. J.-C. ?</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="checkAnswer(2, 0, this)" class="p-2.5 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">IX<sup>e</sup> siècle</button>
+                    <button onclick="checkAnswer(2, 1, this)" class="p-2.5 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">VIII<sup>e</sup> siècle</button>
+                </div>
+                <div id="feedback-2" class="text-xs p-3 rounded-lg hidden"></div>
+            </div>
+        </div>
 
-function showResult(){
-  if(timerInterval)clearInterval(timerInterval);
-  document.getElementById('exam-quiz').style.display='none';
-  document.getElementById('exam-result').style.display='block';
-  const pct=Math.round(score/questions.length*100);
-  document.getElementById('scoreNum').textContent=score;
-  document.getElementById('scoreTot').textContent='/'+questions.length;
-  const ring=document.getElementById('scoreRing');
-  let msg='',sub='',col='';
-  if(pct>=80){msg='Excellent ! '+pct+'%';sub='Tu maîtrises bien la matière — continue comme ça !';col='#4ade80';}
-  else if(pct>=60){msg='Bien ! '+pct+'%';sub='Quelques points à retravailler, tu y es presque !';col='#fbbf24';}
-  else{msg='À retravailler — '+pct+'%';sub='Reprends les chapitres où tu as eu des erreurs.';col='#f87171';}
-  ring.style.borderColor=col;ring.style.background=col+'18';
-  document.getElementById('scoreNum').style.color=col;
-  document.getElementById('scoreRing').style.boxShadow='0 0 40px '+col+'30';
-  document.getElementById('resultMsg').textContent=msg;
-  document.getElementById('resultSub').textContent=sub;
-  const list=document.getElementById('reviewList');
-  list.innerHTML='';
-  answers.forEach((a,i)=>{
-    const d=document.createElement('div');
-    d.className='ri '+(a.correct?'ok':'ko');
-    d.innerHTML=`<div class="ri-q">${i+1}. ${a.q}</div>
-    <div class="ri-a ${a.correct?'g':'r'}">${a.correct?'✅':'❌'} ${a.yourAns}</div>
-    ${!a.correct?`<div class="ri-a g">✅ Bonne réponse : ${a.rightAns}</div>`:''}`;
-    list.appendChild(d);
-  });
-  window.scrollTo(0,0);
-}
+        <div id="tab-obj3" class="tab-content space-y-6">
+            <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-950">
+                <strong>Explication du prof :</strong> L'exercice final de l'examen te demande de trier les documents d'histoire et de dire si on peut leur faire confiance.
+            </div>
 
-function restartExam(){
-  document.getElementById('exam-result').style.display='none';
-  document.getElementById('exam-start').style.display='block';
-}
-</script>
+            <div class="bg-white border border-gray-200 rounded-xl p-6 space-y-4 shadow-sm">
+                <h3 class="text-sm font-black uppercase tracking-wider text-blue-600 border-b pb-2">La méthode d'analyse :</h3>
+                
+                <div class="space-y-4 text-sm leading-relaxed">
+                    <div>
+                        <strong class="text-gray-950 block mb-0.5">• Trace du passé vs Travail postérieur</strong>
+                        <p class="text-gray-600 text-xs">
+                            - <strong>Trace du passé :</strong> C'est un document brut fait à l'époque même (ex: une vraie loi écrite en 1914, une photo d'une usine en 1850).<br>
+                            - <strong>Travail postérieur :</strong> C'est un texte écrit bien plus tard par un historien ou un auteur de manuel scolaire pour analyser le passé.
+                        </p>
+                    </div>
+
+                    <div>
+                        <strong class="text-gray-950 block mb-0.5">• Les 4 balises pour évaluer la Fiabilité</strong>
+                        <p class="text-gray-600 text-xs">
+                            Pour savoir si un document est crédible, tu dois obligatoirement vérifier :<br>
+                            1. <strong>L'Auteur :</strong> Qui est-ce ? Est-il un témoin direct ou un spécialiste ?<br>
+                            2. <strong>Ses Intentions :</strong> Pourquoi a-t-il fait ce document ? (Pour informer, pour faire de la propagande, pour donner son opinion ?)<br>
+                            3. <strong>La Forme :</strong> Le document est-il soigné, cite-t-il ses propres sources ?<br>
+                            4. <strong>Le Fond :</strong> Les informations correspondent-elles à ce que disent les autres spécialistes ?
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 text-white rounded-xl p-5 space-y-4">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Vérification immédiate</span>
+                <p class="text-xs font-medium">Un texte écrit par un historien en 2018 qui analyse le fonctionnement des écoles au Moyen Âge est :</p>
+                <div class="grid grid-cols-1 gap-2">
+                    <button onclick="checkAnswer(3, 0, this)" class="text-left p-3 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">Une trace du passé directe.</button>
+                    <button onclick="checkAnswer(3, 1, this)" class="text-left p-3 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">Un travail postérieur d'analyse.</button>
+                </div>
+                <div id="feedback-3" class="text-xs p-3 rounded-lg hidden"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Changement d'onglet clair
+        window.switchTab = function(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.className = "tab-btn py-4 flex-1 text-xs font-medium border-b-2 border-transparent text-gray-500 hover:text-blue-600";
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            document.getElementById(`btn-${tabId}`).className = "tab-btn py-4 flex-1 text-xs font-bold border-b-2 border-blue-600 text-blue-600";
+        };
+
+        // Logique des quiz interactifs avec explications adaptées
+        window.checkAnswer = function(questionId, optionIdx, btn) {
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            feedback.classList.remove('hidden');
+
+            if (questionId === 1) {
+                if (optionIdx === 1) {
+                    feedback.className = "text-xs p-3 rounded-lg bg-emerald-600 text-white block mt-2";
+                    feedback.innerHTML = "<strong>Correct !</strong> Suivre une évolution chronologique du passé pour voir les changements s'appelle la diachronie.";
+                } else {
+                    feedback.className = "text-xs p-3 rounded-lg bg-rose-600 text-white block mt-2";
+                    feedback.innerHTML = "<strong>Faux.</strong> La rétrospection demanderait de partir de la voiture actuelle de l'élève pour reculer. Ici, on suit la flèche du temps de 1900 à aujourd'hui.";
+                }
+            }
+            
+            if (questionId === 2) {
+                if (optionIdx === 1) {
+                    feedback.className = "text-xs p-3 rounded-lg bg-emerald-600 text-white block mt-2";
+                    feedback.innerHTML = "<strong>Bravo !</strong> L'année 800 se termine par '00'. On applique l'exception : on ne fait pas +1, on garde le 8. C'est donc le VIIIe siècle.";
+                } else {
+                    feedback.className = "text-xs p-3 rounded-lg bg-rose-600 text-white block mt-2";
+                    feedback.innerHTML = "<strong>Piège !</strong> Tu as fait +1 alors que la date se termine par deux zéros. C'est l'exception de ta feuille d'objectifs !";
+                }
+            }
+
+            if (questionId === 3) {
+                if (optionIdx === 1) {
+                    feedback.className = "text-xs p-3 rounded-lg bg-emerald-600 text-white block mt-2";
+                    feedback.innerHTML = "<strong>Parfait !</strong> L'historien écrit en 2018 sur un événement vieux de plusieurs siècles. C'est une étude menée après coup : un travail postérieur.";
+                } else {
+                    feedback.className = "text-xs p-3 rounded-lg bg-rose-600 text-white block mt-2";
+                    feedback.innerHTML = "<strong>Attention.</strong> La source n'a pas été écrite au Moyen Âge, elle a été faite en 2018. Ce n'est pas une trace brute.";
+                }
+            }
+        };
+    </script>
 </body>
 </html>
