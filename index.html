@@ -3,233 +3,1458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U1207 - Les Objectifs de l'Examen</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Segoe UI', system-ui, sans-serif; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-    </style>
+    <title>Synthèse de Formation Historique (U1207)</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
-
-    <header class="bg-white border-b border-gray-200 py-6 px-4">
-        <div class="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div>
-                <span class="text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-2.5 py-1 rounded-md">Contenu Strict de l'Image</span>
-                <h1 class="text-xl font-black text-gray-950 mt-1">U1207 • Le Kit de Survie (Objectifs Uniques)</h1>
-                <p class="text-xs text-gray-500">Ici, on n'étudie que ce qui est écrit sur ta feuille d'objectifs.</p>
+<body class="dark-theme">
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-group">
+                <span class="logo-icon">⏳</span>
+                <div>
+                    <h1>U1207 • Formation Historique</h1>
+                    <p>Plateforme interactive de révision & mémorisation</p>
+                </div>
             </div>
-            <div class="bg-blue-600 text-white font-bold rounded-xl px-4 py-2 text-xs shadow-sm">
-                Focus Examen
+            <div class="header-actions">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="global-search" placeholder="Rechercher un concept, une date..." oninput="filterContent()">
+                </div>
+                <button id="theme-toggle" class="theme-btn" onclick="toggleTheme()" title="Changer de thème">
+                    <span class="theme-icon">☀️</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-3xl mx-auto px-4 flex justify-between text-center overflow-x-auto">
-            <button onclick="switchTab('obj1')" id="btn-obj1" class="tab-btn py-4 flex-1 text-xs font-bold border-b-2 border-blue-600 text-blue-600 active">
-                1. Concepts du Temps
-            </button>
-            <button onclick="switchTab('obj2')" id="btn-obj2" class="tab-btn py-4 flex-1 text-xs font-medium border-b-2 border-transparent text-gray-500 hover:text-blue-600">
-                2. Siècles & Périodes
-            </button>
-            <button onclick="switchTab('obj3')" id="btn-obj3" class="tab-btn py-4 flex-1 text-xs font-medium border-b-2 border-transparent text-gray-500 hover:text-blue-600">
-                3. Analyse de Documents
-            </button>
-        </div>
-    </nav>
-
-    <main class="flex-grow max-w-3xl w-full mx-auto p-4 sm:p-6 space-y-6">
-
-        <div id="tab-obj1" class="tab-content active space-y-6">
-            <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-950">
-                <strong>Explication du prof :</strong> Cette partie teste ta capacité à comprendre comment un enfant de primaire se situe dans le temps et comment l'instituteur doit structurer ses leçons d'histoire.
-            </div>
-
-            <div class="bg-white border border-gray-200 rounded-xl p-6 space-y-4 shadow-sm">
-                <h3 class="text-sm font-black uppercase tracking-wider text-blue-600 border-b pb-2">Les notions à restituer :</h3>
-                
-                <div class="space-y-4 text-sm">
-                    <div>
-                        <strong class="text-gray-950 block mb-1">• Temps vécu vs Temps conçu vs Temps historique</strong>
-                        <p class="text-gray-600 text-xs pl-3 border-l-2 border-gray-300">
-                            - <strong>Temps vécu (Maternelle-P2) :</strong> C'est le temps biologique et inconscient. L'enfant n'a pas de montre, il se repère par ses actions ("après la récré", "pendant le dîner").<br>
-                            - <strong>Temps conçu (Dès la P3) :</strong> L'enfant utilise enfin des outils construits pour mesurer le temps (heures, calendriers, frises). C'est un temps abstrait et mathématique.<br>
-                            - <strong>Temps historique :</strong> Le temps très lointain qui s'est déroulé avant la naissance de l'enfant et qui nécessite des repères collectifs.
-                        </p>
-                    </div>
-
-                    <div>
-                        <strong class="text-gray-950 block mb-1">• La Décentration</strong>
-                        <p class="text-gray-600 text-xs pl-3 border-l-2 border-gray-300">
-                            C'est l'action pour un élève de sortir de sa propre ligne du temps personnelle. Il comprend que le monde existait avant lui et qu'il y a eu un passé sans sa présence.
-                        </p>
-                    </div>
-
-                    <div>
-                        <strong class="text-gray-950 block mb-1">• Repère temporel vs Représentation du temps</strong>
-                        <p class="text-gray-600 text-xs pl-3 border-l-2 border-gray-300">
-                            - Le <strong>repère</strong> est l'événement historique brut (ex: la construction d'un château fort).<br>
-                            - La <strong>représentation</strong> est l'outil visuel utilisé pour afficher ce repère (ex: une frise chronologique linéaire).
-                        </p>
-                    </div>
-
-                    <div>
-                        <strong class="text-gray-950 block mb-1">• Rétrospection vs Diachronie</strong>
-                        <p class="text-gray-600 text-xs pl-3 border-l-2 border-gray-300">
-                            - La <strong>rétrospection</strong> est la méthode de départ : on part d'une question d'aujourd'hui pour regarder en arrière dans le passé.<br>
-                            - La <strong>diachronie</strong> consiste à suivre le fil du temps dans le sens normal pour observer l'évolution, les changements (ruptures) et ce qui reste identique (continuités).
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 text-white rounded-xl p-5 space-y-4">
-                <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Vérification immédiate</span>
-                <p class="text-xs font-medium">Si tu demandes à un enfant d'analyser l'évolution des moyens de transport de 1900 à nos jours en insistant sur l'apparition du moteur, tu travailles en :</p>
-                <div class="grid grid-cols-1 gap-2">
-                    <button onclick="checkAnswer(1, 0, this)" class="text-left p-3 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">En démarche de rétrospection pure.</button>
-                    <button onclick="checkAnswer(1, 1, this)" class="text-left p-3 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">En diachronie (on suit l'évolution linéaire et la rupture du moteur).</button>
-                </div>
-                <div id="feedback-1" class="text-xs p-3 rounded-lg hidden"></div>
-            </div>
-        </div>
-
-        <div id="tab-obj2" class="tab-content space-y-6">
-            <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-950">
-                <strong>Explication du prof :</strong> À l'examen, tu as l'obligation de savoir calculer le siècle d'une date sans te tromper, et de connaître les limites des 5 grandes périodes.
-            </div>
-
-            <div class="bg-white border border-gray-200 rounded-xl p-6 space-y-4 shadow-sm">
-                <h3 class="text-sm font-black uppercase tracking-wider text-blue-600 border-b pb-2">Les règles incontournables :</h3>
-                
-                <div class="space-y-4 text-sm leading-relaxed">
-                    <div class="p-3 bg-gray-50 rounded-lg">
-                        <strong class="text-blue-700 block text-xs uppercase mb-1">La Règle Générale : Faire (+1)</strong>
-                        Tu prends le nombre de centaines (les premiers chiffres de la date) et tu ajoutes <strong>+1</strong>.<br>
-                        • Exemple : l'année <strong>14</strong>92 &rarr; 14 centaines + 1 = 15. C'est le **XV<sup>e</sup> siècle**.
-                    </div>
-
-                    <div class="p-3 bg-red-50 border border-red-200 rounded-lg">
-                        <strong class="text-red-700 block text-xs uppercase mb-1">L'Exception : Les doubles zéros (00)</strong>
-                        Si la date se termine exactement par deux zéros, **tu ne fais pas +1**. Tu gardes juste le nombre de centaines.<br>
-                        • Exemple : l'année <strong>15</strong>00 &rarr; se termine par 00. C'est le **XV<sup>e</sup> siècle** (et pas le XVIe !).
-                    </div>
-
-                    <div class="p-3 bg-gray-50 rounded-lg">
-                        <strong class="text-indigo-700 block text-xs uppercase mb-1">Les 5 Périodes Obligatoires</strong>
-                        1. <strong>Préhistoire :</strong> Des origines à l'écriture (vers -3500 av. J.-C.).<br>
-                        2. <strong>Antiquité :</strong> De -3500 à la chute de Rome (476 apr. J.-C.).<br>
-                        3. <strong>Moyen Âge :</strong> De 476 à la découverte de l'Amérique (1492).<br>
-                        4. <strong>Temps Modernes :</strong> De 1492 à la Révolution Française (1789).<br>
-                        5. <strong>Époque Contemporaine :</strong> De 1789 à aujourd'hui.
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 text-white rounded-xl p-5 space-y-4">
-                <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Vérification immédiate</span>
-                <p class="text-xs font-medium">À quel siècle appartient l'année 800 apr. J.-C. ?</p>
-                <div class="grid grid-cols-2 gap-2">
-                    <button onclick="checkAnswer(2, 0, this)" class="p-2.5 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">IX<sup>e</sup> siècle</button>
-                    <button onclick="checkAnswer(2, 1, this)" class="p-2.5 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">VIII<sup>e</sup> siècle</button>
-                </div>
-                <div id="feedback-2" class="text-xs p-3 rounded-lg hidden"></div>
-            </div>
-        </div>
-
-        <div id="tab-obj3" class="tab-content space-y-6">
-            <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-950">
-                <strong>Explication du prof :</strong> L'exercice final de l'examen te demande de trier les documents d'histoire et de dire si on peut leur faire confiance.
-            </div>
-
-            <div class="bg-white border border-gray-200 rounded-xl p-6 space-y-4 shadow-sm">
-                <h3 class="text-sm font-black uppercase tracking-wider text-blue-600 border-b pb-2">La méthode d'analyse :</h3>
-                
-                <div class="space-y-4 text-sm leading-relaxed">
-                    <div>
-                        <strong class="text-gray-950 block mb-0.5">• Trace du passé vs Travail postérieur</strong>
-                        <p class="text-gray-600 text-xs">
-                            - <strong>Trace du passé :</strong> C'est un document brut fait à l'époque même (ex: une vraie loi écrite en 1914, une photo d'une usine en 1850).<br>
-                            - <strong>Travail postérieur :</strong> C'est un texte écrit bien plus tard par un historien ou un auteur de manuel scolaire pour analyser le passé.
-                        </p>
-                    </div>
-
-                    <div>
-                        <strong class="text-gray-950 block mb-0.5">• Les 4 balises pour évaluer la Fiabilité</strong>
-                        <p class="text-gray-600 text-xs">
-                            Pour savoir si un document est crédible, tu dois obligatoirement vérifier :<br>
-                            1. <strong>L'Auteur :</strong> Qui est-ce ? Est-il un témoin direct ou un spécialiste ?<br>
-                            2. <strong>Ses Intentions :</strong> Pourquoi a-t-il fait ce document ? (Pour informer, pour faire de la propagande, pour donner son opinion ?)<br>
-                            3. <strong>La Forme :</strong> Le document est-il soigné, cite-t-il ses propres sources ?<br>
-                            4. <strong>Le Fond :</strong> Les informations correspondent-elles à ce que disent les autres spécialistes ?
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 text-white rounded-xl p-5 space-y-4">
-                <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Vérification immédiate</span>
-                <p class="text-xs font-medium">Un texte écrit par un historien en 2018 qui analyse le fonctionnement des écoles au Moyen Âge est :</p>
-                <div class="grid grid-cols-1 gap-2">
-                    <button onclick="checkAnswer(3, 0, this)" class="text-left p-3 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">Une trace du passé directe.</button>
-                    <button onclick="checkAnswer(3, 1, this)" class="text-left p-3 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10 transition">Un travail postérieur d'analyse.</button>
-                </div>
-                <div id="feedback-3" class="text-xs p-3 rounded-lg hidden"></div>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        // Changement d'onglet clair
-        window.switchTab = function(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => {
-                el.className = "tab-btn py-4 flex-1 text-xs font-medium border-b-2 border-transparent text-gray-500 hover:text-blue-600";
-            });
-
-            document.getElementById(`tab-${tabId}`).classList.add('active');
-            document.getElementById(`btn-${tabId}`).className = "tab-btn py-4 flex-1 text-xs font-bold border-b-2 border-blue-600 text-blue-600";
-        };
-
-        // Logique des quiz interactifs avec explications adaptées
-        window.checkAnswer = function(questionId, optionIdx, btn) {
-            const feedback = document.getElementById(`feedback-${questionId}`);
-            feedback.classList.remove('hidden');
-
-            if (questionId === 1) {
-                if (optionIdx === 1) {
-                    feedback.className = "text-xs p-3 rounded-lg bg-emerald-600 text-white block mt-2";
-                    feedback.innerHTML = "<strong>Correct !</strong> Suivre une évolution chronologique du passé pour voir les changements s'appelle la diachronie.";
-                } else {
-                    feedback.className = "text-xs p-3 rounded-lg bg-rose-600 text-white block mt-2";
-                    feedback.innerHTML = "<strong>Faux.</strong> La rétrospection demanderait de partir de la voiture actuelle de l'élève pour reculer. Ici, on suit la flèche du temps de 1900 à aujourd'hui.";
-                }
-            }
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <nav class="tabs-nav">
+                <button class="nav-btn active" onclick="switchTab('part1')">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text">1. Contenus Disciplinaires</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('part2')">
+                    <span class="nav-icon">🔬</span>
+                    <span class="nav-text">2. Méthodologies</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('part3')">
+                    <span class="nav-icon">🎓</span>
+                    <span class="nav-text">3. Didactique (P3-P4)</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('tools')">
+                    <span class="nav-icon">🛠️</span>
+                    <span class="nav-text">Outils de Révision</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('flashcards')">
+                    <span class="nav-icon">🎴</span>
+                    <span class="nav-text">Mode Flashcards</span>
+                </button>
+                <button class="nav-btn" onclick="switchTab('qcm-tab')">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">S'entraîner (QCM)</span>
+                </button>
+            </nav>
             
-            if (questionId === 2) {
-                if (optionIdx === 1) {
-                    feedback.className = "text-xs p-3 rounded-lg bg-emerald-600 text-white block mt-2";
-                    feedback.innerHTML = "<strong>Bravo !</strong> L'année 800 se termine par '00'. On applique l'exception : on ne fait pas +1, on garde le 8. C'est donc le VIIIe siècle.";
-                } else {
-                    feedback.className = "text-xs p-3 rounded-lg bg-rose-600 text-white block mt-2";
-                    feedback.innerHTML = "<strong>Piège !</strong> Tu as fait +1 alors que la date se termine par deux zéros. C'est l'exception de ta feuille d'objectifs !";
-                }
-            }
+            <div class="sidebar-sommaire">
+                <h3>Sommaire</h3>
+                <ul>
+                    <li><a href="#part1-header">1. La Maîtrise des Contenus</a></li>
+                    <li><a href="#part1-1">- 1.1 Vocabulaire clé</a></li>
+                    <li><a href="#part1-2">- 1.2 Évolution communication & transport</a></li>
+                    <li><a href="#part1-3">- 1.3 Évolution accès au savoir</a></li>
+                    <li><a href="#part1-4">- 1.4 Périodisation</a></li>
+                    <li><a href="#part1-5">- 1.5 Le document en histoire</a></li>
+                    <li><a href="#part2-header">2. Méthodologies Spécifiques</a></li>
+                    <li><a href="#part2-1">- 2.1 Approche moments clés</a></li>
+                    <li><a href="#part2-2">- 2.2 Lire et exploiter</a></li>
+                    <li><a href="#part2-3">- 2.3 Démarche d'investigation</a></li>
+                    <li><a href="#part2-4">- 2.4 Construction de frise</a></li>
+                    <li><a href="#part3-header">3. Didactique (P3-P4)</a></li>
+                    <li><a href="#part3-1">- 3.1 Repères temporels</a></li>
+                    <li><a href="#part3-2">- 3.2 Didactique périodisation</a></li>
+                    <li><a href="#part3-3">- 3.3 Exploitation documentaire</a></li>
+                </ul>
+            </div>
+        </aside>
 
-            if (questionId === 3) {
-                if (optionIdx === 1) {
-                    feedback.className = "text-xs p-3 rounded-lg bg-emerald-600 text-white block mt-2";
-                    feedback.innerHTML = "<strong>Parfait !</strong> L'historien écrit en 2018 sur un événement vieux de plusieurs siècles. C'est une étude menée après coup : un travail postérieur.";
-                } else {
-                    feedback.className = "text-xs p-3 rounded-lg bg-rose-600 text-white block mt-2";
-                    feedback.innerHTML = "<strong>Attention.</strong> La source n'a pas été écrite au Moyen Âge, elle a été faite en 2018. Ce n'est pas une trace brute.";
-                }
-            }
-        };
-    </script>
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- PART 1: CONTENUS DISCIPLINAIRES -->
+            <section id="part1" class="tab-content active-tab">
+                <div class="section-header" id="part1-header">
+                    <h2>1. La Maîtrise des Contenus Disciplinaires</h2>
+                    <div class="study-controls">
+                        <button class="action-btn secondary" onclick="toggleAllDetails('part1', false)">Tout masquer (Mode Test)</button>
+                        <button class="action-btn primary" onclick="toggleAllDetails('part1', true)">Tout afficher</button>
+                    </div>
+                </div>
+
+                <div class="card" id="part1-1">
+                    <h3>1.1 Notions et concepts clés du vocabulaire de l'historien</h3>
+                    <p class="instruction-text">💡 <em>Cliquez sur les concepts pour révéler ou masquer leur définition complète.</em></p>
+                    
+                    <div class="details-grid">
+                        <details class="interactive-details">
+                            <summary>Repère temporel</summary>
+                            <div class="details-content">
+                                Tout fait historique permettant de (se) situer dans le temps. Le repère peut être une période, une rupture, un moment clé, un fait marquant. <br>
+                                <span class="badge">Exemple</span> <em>l'apparition de l'écriture est un fait historique qui marque le passage de la Préhistoire à l'Histoire. (FWB, 2022)</em>
+                            </div>
+                        </details>
+
+                        <details class="interactive-details">
+                            <summary>Fait historique (et ses 3 types)</summary>
+                            <div class="details-content">
+                                Énoncé à propos d'une réalité du passé que l'on peut objectivement attester à l'aide de documents. L'histoire distingue trois types de faits :
+                                <ul class="styled-list">
+                                    <li><strong>Des événements :</strong> faits inscrits dans une temporalité précise. Ex.: proclamation d'indépendance du Congo.</li>
+                                    <li><strong>Des phénomènes :</strong> faits qui s'inscrivent dans une durée. Ex.: exploitation des richesses des colonies.</li>
+                                    <li><strong>Des évolutions :</strong> Ex.: évolution de l'Homme.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="interactive-details">
+                            <summary>Représentation du temps</summary>
+                            <div class="details-content">
+                                Support utilisé pour représenter le temps (calendriers, lignes du temps, agendas, frises chronologiques...). Il est constitué de repères de temps partagés par tous, tels que les jours de la semaine, des dates, des fêtes, des noms de saisons, des années, des siècles et des millénaires. Ces représentations regroupent deux types d'outils :
+                                <ul class="styled-list">
+                                    <li><strong>Les outils de mesure du temps :</strong> un chronomètre, un sablier, un minuteur...</li>
+                                    <li><strong>Les outils de structuration du temps :</strong> arbre généalogique, ligne du temps, frise de vie, calendrier...</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="interactive-details">
+                            <summary>Moment clé</summary>
+                            <div class="details-content">
+                                Découpage du temps caractérisé par des changements et qui éclaire une (des) réalité(s) d'aujourd'hui (FWB, FHGES, 2022, p. 15). Un fait marquant est un événement qui a marqué un moment clé.
+                            </div>
+                        </details>
+
+                        <details class="interactive-details">
+                            <summary>Rupture</summary>
+                            <div class="details-content">
+                                Fait historique (un événement, un phénomène ou une évolution) qui induit un changement majeur. Il faut noter qu'une rupture peut résulter d'un processus antérieur parfois très long et qu'elle n'exclut pas certaines continuités (FWB, FHGES, 2022, p. 15).
+                            </div>
+                        </details>
+
+                        <details class="interactive-details">
+                            <summary>Savoir culturel</summary>
+                            <div class="details-content">
+                                Héritage (personnages, lieux, événements, patrimoine littéraire, architectural et artistique, commémorations...) relatif à nos régions ou faisant partie du patrimoine commun de l'Humanité (FWB, FHGES, 2022, p. 33).
+                            </div>
+                        </details>
+
+                        <details class="interactive-details">
+                            <summary>Synchronie</summary>
+                            <div class="details-content">
+                                Correspondance entre des faits, entre des événements considérés comme simultanés (CNTRL, 2012).
+                            </div>
+                        </details>
+
+                        <details class="interactive-details">
+                            <summary>Trace du passé VS Travail postérieur</summary>
+                            <div class="details-content">
+                                <ul class="styled-list">
+                                    <li><strong>Trace du passé :</strong> Témoignages laissés, intentionnellement ou non, par les hommes et les femmes qui ont vécu dans le passé. Il s'agit du document source brut. Sa date de création correspond à la date des faits.</li>
+                                    <li><strong>Travail postérieur :</strong> Interprétation postérieure de ces témoignages. Travaux d'historiens, de journalistes, d'auteurs ou d'artistes, actuels ou non. Il s'agit d'un document « pédagogisé », dont la date est postérieure aux faits.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="interactive-details">
+                            <summary>Natures des traces documentaires (6 types)</summary>
+                            <div class="details-content">
+                                <ol class="styled-ol">
+                                    <li><strong>Le document écrit :</strong> Officiel (acte notarié, règlement, loi, facture, carte d'identité...), Littéraire (article de presse, roman, mémoire, correspondance...), Inscription.</li>
+                                    <li><strong>Le document matériel / archéologique :</strong> Bâtiment, monument, objet, trace dans le sol, sculpture, bas-relief.</li>
+                                    <li><strong>Le document iconographique :</strong> Peinture, gravure, dessin, plan, carte, photographie, caricature, affiche.</li>
+                                    <li><strong>Le document schématique :</strong> Cartes, plans, graphiques, schémas...</li>
+                                    <li><strong>Le document audiovisuel :</strong> Radio, enregistrement, œuvre musicale, chanson, interview, film...</li>
+                                    <li><strong>Le témoignage oral :</strong> Source recueillie lors d'une rencontre directe avec un témoin qui a vu/vécu les faits.</li>
+                                </ol>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="card" id="part1-2">
+                    <h3>1.2 Évolution des modes de communication, d'information et de transport (XXe et XXIe siècles P3)</h3>
+                    <div class="timeline-visual-wrapper">
+                        <div class="timeline-row">
+                            <div class="timeline-col">
+                                <div class="timeline-node">Aujourd'hui <span class="subtext">(Après 2010 : Notre époque)</span></div>
+                                <div class="timeline-node-content">
+                                    <p><strong>Faits marquants :</strong> Commémoration du 11 novembre. Hommages (ex. Roi Philippe).</p>
+                                    <p><strong>Habitudes de vie :</strong> Diversité de la mobilité (y compris douce). Accès instantané à l'information (télévision, Internet, réseaux sociaux). Diversité des loisirs, des voyages.</p>
+                                    <p><strong>Innovations & Énergies :</strong> Impacts sur l'environnement (infrastructures routières, embouteillages, pollution). Dépendance au pétrole et projets de transition (véhicules électriques, hybrides, covoiturage, RAVEL).</p>
+                                </div>
+                            </div>
+                            <div class="timeline-col">
+                                <div class="timeline-node">Parents <span class="subtext">(1980-2010 : Révolution numérique)</span></div>
+                                <div class="timeline-node-content">
+                                    <p><strong>Faits marquants :</strong> Années 1990 : Essor d'Internet. Rois Baudouin et Albert II.</p>
+                                    <p><strong>Habitudes de vie :</strong> Usage intensif de la voiture provoquant la périurbanisation. Regain pour les transports publics (création des TEC en 1988-1989). Vols low cost courants. GSM, ordinateurs personnels, GPS.</p>
+                                    <p><strong>Innovations & Énergies :</strong> Révolution numérique rapide (SMS remplacé par WhatsApp/Messenger). Enjeux : cybercriminalité, fake news, fracture numérique.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-col">
+                                <div class="timeline-node">Grands-parents <span class="subtext">(1940-1970 : Démocratisation)</span></div>
+                                <div class="timeline-node-content">
+                                    <p><strong>Faits marquants :</strong> 1940-1945 : Deuxième Guerre mondiale. 1969 : Premiers pas sur la Lune (Apollo 11). Roi Léopold III. Marguerite Bervoets, Fernand Demany, Soldat inconnu.</p>
+                                    <p><strong>Habitudes de vie :</strong> Démocratisation de l'automobile (Trente Glorieuses). Début des vacances à l'étranger en avion. Téléphone fixe à cadran. Télévision (INR en 1953) transformant les loisirs familiaux.</p>
+                                    <p><strong>Innovations & Énergies :</strong> Aménagements routiers massifs au détriment des trams. Lignes de bus diesel. Avions à réaction. 1973 : Premier choc pétrolier.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-col">
+                                <div class="timeline-node">Arrière-grands-parents <span class="subtext">(1910-1930 : Charbon & Vapeur)</span></div>
+                                <div class="timeline-node-content">
+                                    <p><strong>Faits marquants :</strong> 1914-1918 : Première Guerre mondiale. Rois/Reines : Albert Ier et Élisabeth. Gabrielle Petit.</p>
+                                    <p><strong>Habitudes de vie :</strong> Déplacements principalement à pied, tram, vélo ou calèche. Auto rare réservée aux plus aisés. Information via radio, presse écrite (Le Petit Journal) et cinéma muet. Lettres et télégraphes (Morse). Téléphone Marty (1910) rare avec opératrice.</p>
+                                    <p><strong>Innovations & Énergies :</strong> Machine à vapeur (charbon), centrale pour le chemin de fer. 1835 : Première ligne de chemin de fer en Belgique. Tramway électrique. 1889 : Invention de l'automobile. 1895 : Cinéma (Frères Lumière) et Radio (Marconi). 1903 : Premier vol (Frères Wright).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="part1-3">
+                    <h3>1.3 Évolution de l'accès au savoir et à l'instruction</h3>
+                    <div class="accordion-group">
+                        <details class="interactive-details">
+                            <summary>Moment clé 1 : Période gallo-romaine (-50 à Ve siècle)</summary>
+                            <div class="details-content">
+                                <ul class="styled-list">
+                                    <li><strong>Société & Accès :</strong> Passage de la tradition orale celte à la tradition écrite latine (romanisation). École privée, payante, urbaine, masculine et élitiste. La grande majorité dans les campagnes reste analphabète et pratique l'apprentissage par le travail de la terre. Les langues celtes s'éteignent à la fin du IVe siècle.</li>
+                                    <li><strong>Organisation (3 niveaux) :</strong> 
+                                        <ol class="styled-ol">
+                                            <li><em>Magister :</em> école primaire (lire, écrire et compter).</li>
+                                            <li><em>Grammaticus :</em> enseignement secondaire dès 12 ans (grands auteurs grecs et latins).</li>
+                                            <li><em>Rhetor :</em> enseignement supérieur vers 15-16 ans (art oratoire pour les nobles).</li>
+                                        </ol>
+                                    </li>
+                                    <li><strong>Discipline & Matériel :</strong> Férule (punition corporelle pour paresse). Calame (roseau taillé) et encre sur volumen (papyrus), tablettes de bois recouvertes de cire gravées avec un stylet (extrémité plate pour effacer).</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="interactive-details">
+                            <summary>Moment clé 2 : Moyen Âge (XIe - XIVe siècle)</summary>
+                            <div class="details-content">
+                                <ul class="styled-list">
+                                    <li><strong>Société & Rôle de l'Église :</strong> Société inégalitaire et tripartite. Clergé détient le monopole intellectuel. Analphabétisme rural de 90%. La théologie éclipse le reste.</li>
+                                    <li><strong>Savoirs, Écoles & Universités :</strong> Enseignement des sept « arts libéraux » : Trivium (grammaire, rhétorique, dialectique) et Quadrivium (arithmétique, géométrie, astronomie, musique). XIe-XIIe s : Écoles épiscopales dans les villes. XIIIe siècle (vers 1200) : Premières Universités (charte de Philippe Auguste) enseignant théologie, droit et médecine.</li>
+                                    <li><strong>Éducation des classes :</strong> 
+                                        <ul class="styled-list">
+                                            <li><em>Moines :</em> Éducation livresque. Manuscrits sur parchemin recopiés à la main avec plume d'oie dans le scriptorium (enluminures, lettrines). Lent et sujet à censure.</li>
+                                            <li><em>Noblesse :</em> Éducation pratique dès 7 ans : page à 10 ans, écuyer à 14 ans (équitation, musique, danse, armes), adoubement vers 20 ans.</li>
+                                            <li><em>Artisans/Marchands :</em> Apprentissage dans les guildes. Apprenti dès 12 ans sans salaire. Compagnon à 17 ans (salarié). Chef-d'œuvre obligatoire pour devenir Maître.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="interactive-details">
+                            <summary>Moment clé 3 : Temps modernes (XVe - XVIIIe siècle)</summary>
+                            <div class="details-content">
+                                <ul class="styled-list">
+                                    <li><strong>La Rupture de l'Imprimerie :</strong> Vers 1450, Johannes Gutenberg invente l'imprimerie (typographie avec caractères métalliques mobiles, encre grasse, presse). Recul du latin au profit des langues vernaculaires. Diffusion massive des connaissances (200 millions de livres en 1600).</li>
+                                    <li><strong>Humanisme & Réforme :</strong> L'Humanisme prône l'éducation pour tous (Érasme). Réforme protestante (Luther) incite à lire la Bible directement.</li>
+                                    <li><strong>Écoles paroissiales VS urbaines :</strong> 
+                                        <ul class="styled-list">
+                                            <li><em>Paroissiales :</em> Ouvertes au XVIIe (Contre-Réforme) pour lutter contre le protestantisme. Méthode individuelle de base.</li>
+                                            <li><em>Urbaines :</em> Gérées par des congrégations (Jésuites, Bruxelles en 1604). Classes d'âge, matériel pédagogique, manuels, discipline élitiste. XVIIIe : L'État crée les premières écoles non confessionnelles.</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Révolution scientifique :</strong> Observation et expérimentation. André Vésale (anatomie), Copernic et Galilée (héliocentrisme). Instruments : microscope, baromètre, Pascaline (Blaise Pascal en 1642).</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="interactive-details">
+                            <summary>Moment clé 4 : Patronat, monde ouvrier et monde rural (XIXe - début XXe)</summary>
+                            <div class="details-content">
+                                <ul class="styled-list">
+                                    <li><strong>Inégalités & Travail des enfants :</strong> Révolution industrielle et exode rural. Pas d'instruction obligatoire au XIXe en Belgique. Enfants ouvriers travaillent dès le plus jeune âge dans les mines et le textile pour des salaires de misère.</li>
+                                    <li><strong>Guerre Scolaire & Loi de 1914 :</strong> Lutte politique acharnée. Les libéraux veulent maintenir l'ordre social, le Parti Ouvrier lutte pour l'instruction comme outil d'émancipation. En 1914 : Vote historique de l'instruction gratuite et obligatoire jusqu'à 14 ans.</li>
+                                    <li><strong>Professionnalisation :</strong> Création des Écoles normales, corps d'inspecteurs, programmes de cours stricts. Humanités anciennes (élite gréco-latine) ou modernes (sciences/langues) payantes.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="interactive-details">
+                            <summary>Moment clé 5 : De 1945 à nos jours (Démocratisation)</summary>
+                            <div class="details-content">
+                                <ul class="styled-list">
+                                    <li><strong>Démocratisation :</strong> Accès généralisé au secondaire dans les années 1950. Mixité. Obligation scolaire jusqu'à 18 ans (loi de 1983). Ouverture de l'enseignement supérieur.</li>
+                                    <li><strong>Pacte Scolaire de 1959 :</strong> Accord apaisant les tensions entre officiel (État/Communes) et libre (Catholique). Trois principes majeurs : paix scolaire (subventionnement équitable), liberté de choix, gratuité.</li>
+                                    <li><strong>Aujourd'hui :</strong> Droits de l'enfant, bien-être (Pacte pour un enseignement d'excellence en 2015). Fracture numérique liée à l'informatique et aux technologies d'IA.</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="card" id="part1-4">
+                    <h3>1.4 La périodisation de l'histoire</h3>
+                    <details class="interactive-details">
+                        <summary>Concept et les 5 grandes périodes</summary>
+                        <div class="details-content">
+                            <p>« Périodiser » consiste à découper et ordonner le temps en déterminant des repères qui semblent pertinents, afin de dégager des ensembles cohérents.</p>
+                            <ol class="styled-ol">
+                                <li><strong>La Préhistoire :</strong> Des origines à l'écriture (vers -3500/-3300 av. J.-C.). Intègre le Paléolithique (nomadisme, pierre taillée) et le Néolithique (sédentarisation, agriculture, élevage).</li>
+                                <li><strong>L'Antiquité :</strong> De l'apparition de l'écriture jusqu'à la fin de l'Empire romain d'Occident en 476. Période celte et conquête romaine.</li>
+                                <li><strong>Le Moyen Âge :</strong> De 476 à 1492 (découverte de l'Amérique). Haut Moyen Âge et période urbaine/seigneuriale dès l'an 1000.</li>
+                                <li><strong>Les Temps modernes :</strong> De 1492 à 1789 (Révolution française). Humanisme, Réforme, Siècle des Lumières.</li>
+                                <li><strong>L'Époque contemporaine :</strong> De 1789 à nos jours (Industrialisation, guerres mondiales, révolution numérique).</li>
+                            </ol>
+                            <p><strong>Période VS Ère :</strong> Une période est un espace de temps borné par des césures. Une ère est le point de départ d'une chronologie (ex: l'ère chrétienne démarrant à l'an 1).</p>
+                            <p><strong>Limites du découpage :</strong> Ce système occidental n'est pas universel. Les dates limites sont conventionnelles et discutées (ex. Moyen Âge fini en 1453 ou 1492). Jacques Le Goff prône l'existence d'un « long Moyen Âge » s'étirant jusqu'au XVIIIe siècle.</p>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="card" id="part1-5">
+                    <h3>1.5 Le document en histoire</h3>
+                    <details class="interactive-details">
+                        <summary>Statut, Historiographie et Notice bibliographique</summary>
+                        <div class="details-content">
+                            <ul class="styled-list">
+                                <li><strong>Statut du document :</strong> L'histoire se construit exclusivement sur base de documents sources. « Pas de documents, pas d'histoire » (Langlois, 1898).</li>
+                                <li><strong>Évolution :</strong> Le XIXe siècle méthodique impose l'usage strict des documents écrits officiels. Au XXe siècle, l'école des Annales (Marc Bloch) élargit cette définition à tout objet humain. Tout est potentiellement source.</li>
+                                <li><strong>Notice bibliographique complète :</strong> Doit comporter : Titre configuré, Auteur, Ouvrage d'origine, Date/siècle de création, Sujet, Traduction, Destinataire.</li>
+                                <li><strong>Pertinence :</strong> Un document est pertinent s'il répond directement à la question d'enquête. 3 équivalences requises : Sujet = Sujet, Époque = Époque, Lieu = Lieu.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- PART 2: METHODOLOGIES -->
+            <section id="part2" class="tab-content">
+                <div class="section-header" id="part2-header">
+                    <h2>2. Les Méthodologies Spécifiques</h2>
+                    <div class="study-controls">
+                        <button class="action-btn secondary" onclick="toggleAllDetails('part2', false)">Tout masquer (Mode Test)</button>
+                        <button class="action-btn primary" onclick="toggleAllDetails('part2', true)">Tout afficher</button>
+                    </div>
+                </div>
+
+                <div class="card" id="part2-1">
+                    <h3>2.1 Approche des moments clés à l'école primaire</h3>
+                    <p>L'étude historique au primaire est progressive et spiralaire, articulée autour de :</p>
+                    <div class="methodology-grid">
+                        <div class="method-card">
+                            <div class="method-icon">⏮️</div>
+                            <h4>La Rétrospection</h4>
+                            <p>Démarrer par l'observation de réalités familières du présent avant de remonter dans le passé pour susciter l'intérêt et la comparaison.</p>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-icon">🔄</div>
+                            <h4>La Diachronie</h4>
+                            <p>Étudier l'évolution des faits dans le temps en faisant des sauts chronologiques ciblés reliés par les notions de continuités et de ruptures.</p>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-icon">⚡</div>
+                            <h4>L'approche par ruptures</h4>
+                            <p>Plutôt que d'étudier de manière linéaire (Cause -> Déroulement -> Conséquence), on étudie un fait marquant et on cherche ses origines et ses impacts actuels.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="part2-2">
+                    <h3>2.2 Lire, contextualiser, exploiter et critiquer un document en classe</h3>
+                    <details class="interactive-details">
+                        <summary>Les 3 Obstacles chez l'élève</summary>
+                        <div class="details-content">
+                            <ol class="styled-ol">
+                                <li><strong>Contextualisation :</strong> Comprendre une trace exige des connaissances historiques que l'élève ne possède pas encore.</li>
+                                <li><strong>Langage spécialisé :</strong> Les textes anciens et les images (caricatures, enluminures) sont très complexes à déchiffrer.</li>
+                                <li><strong>Manque d'esprit critique immédiat :</strong> Les documents ne sont pas neutres ; ils ne portent pas une « vérité » brute et exigent une confrontation.</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <details class="interactive-details">
+                        <summary>Le travail préalable de l'enseignant (Configuration)</summary>
+                        <div class="details-content">
+                            <p>Pour rendre le document exploitable, le professeur doit :</p>
+                            <ul class="styled-list">
+                                <li>Donner un titre clair et rédiger la notice bibliographique.</li>
+                                <li>Créer un chapeau introductif situant la scène ou le texte.</li>
+                                <li>Fournir une biographie simplifiée de l'auteur.</li>
+                                <li>Définir les mots compliqués ou expressions archaïques directement sur la feuille.</li>
+                                <li>Ajouter des repères visuels ou annotations graphiques explicatives.</li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <details class="interactive-details">
+                        <summary>Protocole d'exploitation (Les 6 étapes pour les consignes)</summary>
+                        <div class="details-content">
+                            <ol class="styled-ol">
+                                <li><strong>Sens général :</strong> Dégager le thème global (Ex: <em>Quel est le sujet principal ?</em>).</li>
+                                <li><strong>Identifier (QUOI, QUI, OÙ, QUAND) :</strong> Nature, auteur, lieu de production, date/siècle. Justifier s'il s'agit d'une trace du passé ou d'un travail postérieur.</li>
+                                <li><strong>Confronter aux connaissances :</strong> Activer les représentations initiales de l'élève.</li>
+                                <li><strong>Extraire des informations :</strong> Relever des indices explicites et faire des déductions sans surinterpréter.</li>
+                                <li><strong>Expliquer le document :</strong> Lier avec le cours ou un document informatif d'étayage.</li>
+                                <li><strong>Exercer son esprit critique :</strong> Juger la pertinence et évaluer la fiabilité (déceler les intentions d'informer, de convaincre, ou de divertir).</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <h4 style="margin-top: 1.5rem;">Grille de Fiabilité (Critères critiques)</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>CRITÈRES</th>
+                                    <th>ÉLÉMENTS INDIQUANT LA FIABILITÉ</th>
+                                    <th>ÉLÉMENTS INDIQUANT LA NON-FIABILITÉ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Auteur</strong></td>
+                                    <td>Expert reconnu, témoin direct oculaire, contemporain des faits.</td>
+                                    <td>Biais d'opinion marqué, sous contrainte, témoin indirect éloigné.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Intentions</strong></td>
+                                    <td>But d'informer objectivement, document officiel libre.</td>
+                                    <td>Caricaturer, divertir, visée commerciale, propagande politique.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Forme</strong></td>
+                                    <td>Maîtrise de la langue, structure soignée, document d'archive.</td>
+                                    <td>Publication libre réseaux sociaux, fautes de langue, blog non vérifié.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fond</strong></td>
+                                    <td>Factuel, corroboré par d'autres sources, sources citées.</td>
+                                    <td>Subjectivité évidente, exagération, affirmations sans preuve, sarcasme.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card" id="part2-3">
+                    <h3>2.3 La démarche d'investigation en histoire (6 étapes)</h3>
+                    <div class="steps-flow">
+                        <div class="step-bubble">
+                            <div class="step-num">1</div>
+                            <div class="step-label">Observer</div>
+                        </div>
+                        <div class="step-bubble">
+                            <div class="step-num">2</div>
+                            <div class="step-label">Se questionner</div>
+                        </div>
+                        <div class="step-bubble">
+                            <div class="step-num">3</div>
+                            <div class="step-label">Rechercher</div>
+                        </div>
+                        <div class="step-bubble">
+                            <div class="step-num">4</div>
+                            <div class="step-label">Structurer</div>
+                        </div>
+                        <div class="step-bubble">
+                            <div class="step-num">5</div>
+                            <div class="step-label">Valider</div>
+                        </div>
+                        <div class="step-bubble">
+                            <div class="step-num">6</div>
+                            <div class="step-label">Communiquer</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        Ce cycle place l'élève au centre. Il observe des ruptures, formule une question de recherche, analyse des indices documentaires, structure via des frises, valide si cela répond à sa question initiale, puis communique ses résultats.
+                    </p>
+                </div>
+
+                <div class="card" id="part2-4">
+                    <h3>2.4 Construction ou annotation d'une frise chronologique</h3>
+                    <details class="interactive-details">
+                        <summary>Règles et Codages Mathématiques</summary>
+                        <div class="details-content">
+                            <p>Une frise chronologique est un outil mathématique. Contrairement à un simple tableau, elle respecte une <strong>échelle linéaire rigoureuse</strong> (par exemple, 1 cm = 10 ans).</p>
+                            <ul class="styled-list">
+                                <li><strong>Éléments obligatoires :</strong> Échelle visible, 3 lignes parallèles formant deux bandes horizontales. Flèche directionnelle à droite (le temps continue), trait ondulé vertical à gauche (indiquant une rupture avec le passé lointain non représenté).</li>
+                                <li><strong>Positionnement :</strong> Les dates de césure se placent verticalement au-dessus des traits séparateurs. Le nom de la période s'écrit dans la bande inférieure.</li>
+                                <li><strong>Codage :</strong> Un événement ponctuel est marqué par un trait vertical ou une flèche. Une durée est représentée par un ruban rectangulaire délimité.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- PART 3: DIDACTIQUE -->
+            <section id="part3" class="tab-content">
+                <div class="section-header" id="part3-header">
+                    <h2>3. La Didactique de l'Enseignement (P3-P4)</h2>
+                    <div class="study-controls">
+                        <button class="action-btn secondary" onclick="toggleAllDetails('part3', false)">Tout masquer (Mode Test)</button>
+                        <button class="action-btn primary" onclick="toggleAllDetails('part3', true)">Tout afficher</button>
+                    </div>
+                </div>
+
+                <div class="card" id="part3-1">
+                    <h3>3.1 Construction des repères temporels</h3>
+                    <details class="interactive-details">
+                        <summary>A. Évolution du système temporel (3 stades chez l'enfant)</summary>
+                        <div class="details-content">
+                            <ol class="styled-ol">
+                                <li><strong>Temps vécu (Petite enfance) :</strong> Le temps est subjectif, centré sur soi et dicté par les cycles naturels et rituels de la journée.</li>
+                                <li><strong>Temps conçu (M3-P2) :</strong> Le temps devient objectif. L'enfant apprend à utiliser les instruments inventés par l'homme (horloge, calendrier). Le temps prend un caractère régulier.</li>
+                                <li><strong>Temps historique (P3 et +) :</strong> Le temps devient abstrait. Il nécessite une <strong>décentration cognitive</strong> (comprendre que des événements se sont produits avant sa naissance) et l'utilisation d'outils de spatialisation (lignes du temps, frises).</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <details class="interactive-details">
+                        <summary>B. L'arbre généalogique & C. Concept de génération</summary>
+                        <div class="details-content">
+                            <ul class="styled-list">
+                                <li><strong>Arbre généalogique :</strong> En P3, il est limité à 4 générations pour rester compréhensible. Il permet d'étudier concrètement les liens de parenté, de filiation et les concepts de simultanéité, d'antériorité et de postériorité.</li>
+                                <li><strong>Génération familiale (incluse) :</strong> Basée sur les liens biologiques directs. On estime qu'un siècle équivaut à environ 3 ou 4 générations familiales successives (Enfants, Parents, Grands-parents, Arrière-grands-parents).</li>
+                                <li><strong>Génération sociale (exclue) :</strong> Référence sociologique à des groupes d'âges (Ex: Baby-boomers, Gen Z). Ce concept est exclu du programme au primaire.</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="interactive-details">
+                        <summary>D. La chronologie vivante (Didactique active)</summary>
+                        <div class="details-content">
+                            <p>Proposée par M. Jacquemin. Consiste à matérialiser physiquement la ligne du temps dans le couloir ou la classe en créant 4 bandes de couleurs représentant les époques des 4 générations. Les élèves y accrochent des objets, des photos ou des résumés d'interviews de leurs aînés pour connecter l'abstrait au vécu.</p>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="card" id="part3-2">
+                    <h3>3.2 Didactique de la périodisation</h3>
+                    <details class="interactive-details">
+                        <summary>Refus du déterminisme, construction artificielle et dates-repères</summary>
+                        <div class="details-content">
+                            <ul class="styled-list">
+                                <li><strong>Contre le déterminisme :</strong> Il faut rejeter l'idée que l'histoire est une succession mécanique et inévitable d'événements. Elle découle de choix humains et de contingences. Il faut privilégier l'étude des ruptures et des sauts dans le temps.</li>
+                                <li><strong>Origine artificielle des périodes :</strong> L'élève doit comprendre que les 5 périodes historiques sont des inventions académiques conventionnelles établies au XIXe siècle et qu'elles ne correspondent pas à des réalités universelles absolues.</li>
+                                <li><strong>Importance des dates balises (Le Goff) :</strong> Certaines dates phares (1492, 1914...) sont nécessaires non pas pour le simple par cœur, mais comme repères stables pour situer les évolutions lentes.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="card" id="part3-3">
+                    <h3>3.3 Principes d'exploitation documentaire en classe</h3>
+                    <details class="interactive-details">
+                        <summary>Zapping documentaire, complémentarité et étayage</summary>
+                        <div class="details-content">
+                            <ul class="styled-list">
+                                <li><strong>Refus du zapping documentaire :</strong> L'enseignant doit se limiter à présenter un nombre restreint de documents (1 à 3 maximum par séance) afin de permettre une véritable analyse critique de fond plutôt qu'un survol superficiel.</li>
+                                <li><strong>Complémentarité des supports :</strong> Associer des traces du passé (source d'émotion et de curiosité) à des travaux postérieurs (qui apportent le vocabulaire et le contexte).</li>
+                                <li><strong>Étayage indispensable :</strong> Ne jamais distribuer un document brut aux élèves sans aménagement pédagogique (chapeau, glossaire, notice auteur).</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- TOOLS TAB -->
+            <section id="tools" class="tab-content">
+                <div class="section-header">
+                    <h2>Outils de Révision Historique</h2>
+                </div>
+
+                <div class="tools-grid">
+                    <!-- Century Calculator -->
+                    <div class="card tool-card">
+                        <h3>⏳ Calculateur de Siècles</h3>
+                        <p class="tool-desc">Entrez une année pour trouver son siècle en chiffres romains et comprendre la règle.</p>
+                        <div class="tool-inputs">
+                            <input type="number" id="year-input" placeholder="Ex: 1492" oninput="calculateCentury()">
+                        </div>
+                        <div id="century-result" class="result-box">
+                            <span class="result-text">Entrez une année ci-dessus...</span>
+                        </div>
+                    </div>
+
+                    <!-- Reliability Scorer -->
+                    <div class="card tool-card">
+                        <h3>🛡️ Analyseur de Fiabilité Documentaire</h3>
+                        <p class="tool-desc">Évaluez la source d'un document historique pour calculer un score de fiabilité estimé.</p>
+                        
+                        <div class="scorer-step" id="scorer-form">
+                            <div class="input-group">
+                                <label for="crit-author"><strong>1. Auteur :</strong> Qui est l'auteur ?</label>
+                                <select id="crit-author" onchange="evaluateReliability()">
+                                    <option value="3">Expert reconnu / Témoin direct fiable</option>
+                                    <option value="2">Témoin direct mais avec un parti pris</option>
+                                    <option value="1">Témoin indirect / Source de seconde main</option>
+                                    <option value="0">Auteur inconnu ou suspect / Biais extrême</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="crit-intent"><strong>2. Intentions :</strong> Quel est le but du document ?</label>
+                                <select id="crit-intent" onchange="evaluateReliability()">
+                                    <option value="3">Informer objectivement / Document officiel neutre</option>
+                                    <option value="2">Témoigner / Raconter librement</option>
+                                    <option value="1">Persuader / Argumenter / Caricaturer</option>
+                                    <option value="0">Propagande / Publicité / Tromper délibérément</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="crit-form"><strong>3. Forme :</strong> Quel est le canal et la rigueur ?</label>
+                                <select id="crit-form" onchange="evaluateReliability()">
+                                    <option value="3">Ouvrage scientifique / Archive d'État soignée</option>
+                                    <option value="2">Presse de référence / Journal intime bien rédigé</option>
+                                    <option value="1">Blog personnel / Article sans comité de lecture</option>
+                                    <option value="0">Réseau social / Tract anonyme / Fautes grossières</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="crit-content"><strong>4. Fond :</strong> Les faits sont-ils vérifiables ?</label>
+                                <select id="crit-content" onchange="evaluateReliability()">
+                                    <option value="3">Factuel, sourcé et entièrement corroboré</option>
+                                    <option value="2">Opinion étayée par quelques exemples</option>
+                                    <option value="1">Hypothétique ou affirmations non vérifiées</option>
+                                    <option value="0">Rumeur / Sarcasme / Mensonge évident</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="reliability-result" class="result-box reliability-badge neutral">
+                            <strong>Score : - / 12</strong><br>
+                            <span class="result-subtext">Sélectionnez les indicateurs.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FLASHCARDS TAB -->
+            <section id="flashcards" class="tab-content">
+                <div class="section-header">
+                    <h2>Méga-Pack de Révision (35 Flashcards)</h2>
+                    <p class="fc-instructions" style="color: var(--text-secondary);">
+                        Cliquez sur une carte pour la retourner et révéler la réponse. Idéal pour la mémorisation active !
+                    </p>
+                </div>
+
+                <div class="flashcards-grid">
+                    <!-- Card 1 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Vocabulaire</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce qu'un repère temporel ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Tout fait historique permettant de se situer dans le temps (ex: une période, une rupture, un moment clé).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Vocabulaire</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Quelle est la différence entre un "événement" et un "phénomène" ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Un <strong>événement</strong> est inscrit dans une temporalité précise (ex: une bataille), un <strong>phénomène</strong> s'inscrit dans la durée (ex: l'exploitation coloniale).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Vocabulaire</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce qu'une "Trace du passé" ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Un document source brut, créé à la date même des faits (témoignage laissé intentionnellement ou non).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Vocabulaire</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce qu'un "Travail postérieur" ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Une interprétation réalisée après les faits. C'est un document "pédagogisé" (ex: travaux d'historiens, manuels).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Vocabulaire</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Citez au moins 3 "natures" de traces documentaires.</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Écrit, matériel/archéologique, iconographique (image), schématique, audiovisuel, témoignage oral.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Évolutions</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Quelle source d'énergie était centrale pour l'industrie et les trains entre 1910 et 1930 ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Le charbon (qui fait fonctionner la machine à vapeur inventée par James Watt).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Évolutions</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce qui caractérise les habitudes de vie durant les "Trente Glorieuses" (1940-1970) ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>La hausse des salaires, l'exode rural, la démocratisation de l'automobile et l'arrivée de la télévision (1953 en Belgique).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>À l'époque gallo-romaine, comment s'appelaient les 3 types de maîtres (primaire, secondaire, supérieur) ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>1. Magister (lire/écrire)<br>2. Grammaticus (auteurs)<br>3. Rhetor (art oratoire).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 9 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Sur quoi les écoliers romains écrivaient-ils à l'aide d'un stylet en métal ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Sur une tablette de bois évidée et recouverte de cire.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 10 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Au Moyen Âge, qu'est-ce que le "scriptorium" ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>La salle du monastère où les moines copistes recopiaient intégralement à la main les manuscrits sur du parchemin.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 11 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Quelles sont les 3 étapes de l'éducation d'un chevalier au Moyen Âge ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>1. Page (10 ans)<br>2. Écuyer (14 ans)<br>3. Adoubement (vers 20 ans).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 12 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qui a inventé l'imprimerie et en quelle année (environ) ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Johannes Gutenberg, vers 1450, à Mayence (typographie à caractères mobiles).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 13 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'a découvert/confirmé Galilée avec sa lunette astronomique en 1609 ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>L'héliocentrisme (le Soleil est au centre de l'univers et la Terre tourne autour), théorie émise par Copernic.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 14 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Pourquoi les enfants travaillaient-ils massivement en usine au XIXe siècle ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Car l'instruction n'était pas obligatoire. Ils étaient une main-d'œuvre bon marché indispensable aux industriels et leur salaire aidait les familles pauvres.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 15 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Que stipule la Loi de 1914 en Belgique (issue de la Guerre Scolaire) ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Elle institue l'instruction gratuite et obligatoire pour tous les enfants jusqu'à 14 ans.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 16 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Accès au Savoir</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce que le Pacte Scolaire de 1959 en Belgique ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Un accord national garantissant la paix entre l'enseignement officiel et libre (liberté de choix pour les parents et subventionnement équitable).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 17 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Périodisation</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Quelles sont les dates de début et de fin de l'Antiquité ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>De l'apparition de l'écriture (vers -3500) jusqu'à la chute de l'Empire romain d'Occident (476).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 18 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Périodisation</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>La découverte de l'Amérique (1492) sert de limite conventionnelle entre quelles périodes ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Elle marque la fin du Moyen Âge et le début des Temps Modernes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 19 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Méthodologie</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce que l'approche "Diachronique" ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>C'est l'étude de l'évolution des faits dans le temps en articulant les moments clés via leurs ruptures et continuités.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 20 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Méthodologie</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Quelles sont les 3 "équivalences" pour affirmer qu'un document est pertinent ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>1. Sujet du doc = Sujet recherché<br>2. Époque du doc = Époque recherchée<br>3. Lieu du doc = Lieu recherché.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 21 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Méthodologie</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Lors de la "carte d'identité" d'un document (Étape 2), quelles sont les 4 informations à relever ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>QUOI (Nature/Statut), QUI (Auteur), OÙ (Lieu) et QUAND (Date).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 22 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Méthodologie</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Donnez deux exemples prouvant qu'un document/auteur n'est PAS fiable.</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Auteur avec des biais/sous contrainte, intention de propagande/faire rire, absence de sources, document irréaliste ou sarcastique.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 23 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Méthodologie</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Quelles sont les 6 étapes de la démarche d'investigation (AFP) ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>1. Observer, 2. Se questionner, 3. Rechercher, 4. Structurer, 5. Valider, 6. Communiquer.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 24 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Méthodologie</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Comment matérialise-t-on le "temps antérieur non représenté" sur une frise chronologique ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Par un trait discontinu ou ondulé (une déchirure) à l'extrémité gauche de la ligne.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 25 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Méthodologie</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Quelle est la règle absolue qui différencie une frise chronologique d'un simple tableau ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>La frise est un outil mathématique obligatoirement gradué à l'échelle (ex: 1 cm = 10 ans fixe).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 26 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Quels sont les 3 stades du système temporel chez l'enfant ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>1. Le temps vécu (subjectif/égocentrique)<br>2. Le temps conçu (mesuré socialement)<br>3. Le temps historique (abstrait).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 27 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce que la "Décentration Cognitive" (requise pour le temps historique) ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>La capacité de l'enfant à se détacher de sa propre centration pour comprendre le point de vue des autres et la profondeur du passé avant sa naissance.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 28 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>En P3, le programme limite l'arbre généalogique à combien de générations ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>À 4 générations (Enfants, Parents, Grands-parents, Arrière-grands-parents).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 29 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Sur un arbre généalogique, quelles sont les 3 relations temporelles que l'enfant découvre concrètement ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>L'antériorité (avant), la postériorité (après) et la simultanéité (en même temps).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 30 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Combien de "générations familiales" compte-t-on environ dans un siècle ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Environ 3 à 4 générations successives.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 31 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce que la "Chronologie vivante" selon M. Jacquemin ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Matérialiser physiquement la frise en classe par des bandeaux représentant les époques des ancêtres (parents, grands-parents) avec des objets/photos concrets.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 32 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce que le "déterminisme historique" (qu'il faut bannir) ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>L'idée fausse que l'histoire est une suite mécanique, prévisible et linéaire où tout est lié par une causalité stricte sans libre-arbitre.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 33 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Pourquoi enseigner les "dates phares" (ex: 1914, 1492) en primaire selon J. Le Goff ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Elles servent de "balises stables" (repères fixes) indispensables pour aider l'élève à situer et ancrer des évolutions longues ou complexes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 34 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Qu'est-ce que le "Refus du zapping documentaire" (W. Badier) ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>La règle limitant l'utilisation à 1 à 3 documents maximum par leçon pour permettre une véritable investigation au lieu d'un survol passif.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 35 -->
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="fc-category">Didactique</div>
+                                <div class="fc-question-icon">❓</div>
+                                <p>Comment l'enseignant doit-il "étayer" un document source avant de le présenter aux élèves ?</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="fc-back-label">Réponse</div>
+                                <p>Il doit le configurer : rédiger la source, ajouter un chapeau introductif, simplifier le lexique difficile et ajouter des annotations graphiques/clés de lecture.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QCM QUIZ TAB -->
+            <section id="qcm-tab" class="tab-content">
+                <div class="section-header">
+                    <h2>Le Grand Test Final (20 Questions)</h2>
+                    <div class="study-controls">
+                        <button class="action-btn primary" onclick="resetQuiz()">Recommencer le Quiz</button>
+                    </div>
+                </div>
+
+                <p class="qcm-instructions" style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+                    Testez l'intégralité de vos connaissances sur l'unité U1207. Sélectionnez une réponse pour chaque question, puis validez tout en bas.
+                </p>
+
+                <div class="qcm-container" id="qcm-form">
+                    <!-- Question 1 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">1. Selon le vocabulaire de l'historien, qu'est-ce qu'un "phénomène" ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Un fait historique inscrit dans une temporalité précise (ex: indépendance).</div>
+                            <div class="qcm-option" data-idx="1">Un fait historique qui s'inscrit dans une durée (ex: exploitation des richesses).</div>
+                            <div class="qcm-option" data-idx="2">Une transformation physique de l'être humain (ex: évolution de l'Homme).</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Un phénomène s'inscrit dans la durée. L'événement est temporellement précis, et l'évolution concerne des changements plus lents.</div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="card qcm-item" data-answer="0">
+                        <div class="qcm-question">2. Quelle est la différence majeure entre une "Trace du passé" et un "Travail postérieur" ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">La trace est un document brut contemporain des faits, le travail est une interprétation postérieure.</div>
+                            <div class="qcm-option" data-idx="1">La trace est toujours archéologique, le travail est toujours écrit.</div>
+                            <div class="qcm-option" data-idx="2">Il n'y a pas de différence, ce sont deux termes synonymes en didactique.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : La trace du passé a été créée au moment des faits (brute). Le travail postérieur est "pédagogisé" et créé après.</div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="card qcm-item" data-answer="2">
+                        <div class="qcm-question">3. Si vous montrez une caricature ou une photographie en classe, de quelle nature est ce document ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Document matériel</div>
+                            <div class="qcm-option" data-idx="1">Document schématique</div>
+                            <div class="qcm-option" data-idx="2">Document iconographique</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Les peintures, gravures, photos, caricatures et affiches sont des documents iconographiques.</div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">4. À l'époque gallo-romaine, comment s'appelait le maître de l'école primaire (qui apprenait à lire et écrire) ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Le Rhetor</div>
+                            <div class="qcm-option" data-idx="1">Le Magister</div>
+                            <div class="qcm-option" data-idx="2">Le Grammaticus</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Le Magister dirigeait l'école primaire. Le Grammaticus le secondaire (12 ans) et le Rhetor le supérieur (15 ans).</div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">5. En 1914, quelle loi fondamentale a été votée en Belgique suite à la Guerre Scolaire ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Le Pacte Scolaire assurant la paix entre les réseaux.</div>
+                            <div class="qcm-option" data-idx="1">L'instruction gratuite et obligatoire pour tous jusqu'à 14 ans.</div>
+                            <div class="qcm-option" data-idx="2">L'obligation d'aller à l'école jusqu'à 18 ans.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : La loi de 1914 a rendu l'instruction gratuite et obligatoire (jusqu'à 14 ans). Le Pacte scolaire date de 1959, et l'obligation jusqu'à 18 ans de 1983.</div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="card qcm-item" data-answer="0">
+                        <div class="qcm-question">6. Quelle invention marque une rupture décisive aux Temps Modernes (vers 1450) en permettant la diffusion du savoir ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">L'imprimerie (par Gutenberg)</div>
+                            <div class="qcm-option" data-idx="1">La Pascaline (machine à calculer)</div>
+                            <div class="qcm-option" data-idx="2">La lunette astronomique (par Galilée)</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : L'imprimerie de Gutenberg (vers 1450 à Mayence) entraîne le passage du manuscrit au livre imprimé.</div>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="card qcm-item" data-answer="2">
+                        <div class="qcm-question">7. Par rapport à la périodisation, de quand à quand s'étend l'époque des "Temps Modernes" ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">De 476 à 1492</div>
+                            <div class="qcm-option" data-idx="1">De 1789 à aujourd'hui</div>
+                            <div class="qcm-option" data-idx="2">De 1492 (Amériques) à 1789 (Révolution française)</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Les Temps Modernes vont de la découverte de l'Amérique (1492) à la Révolution française (1789).</div>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">8. En méthodologie documentaire, l'enseignant doit vérifier la "pertinence" d'un document. Quelles sont les 3 équivalences obligatoires ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Auteur = Sujet / Date = Époque / Nature = Lieu</div>
+                            <div class="qcm-option" data-idx="1">Sujet Doc = Sujet Recherche / Époque Doc = Époque / Lieu Doc = Lieu</div>
+                            <div class="qcm-option" data-idx="2">Intention = Sujet / Fiabilité = Époque / Statut = Lieu</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Pour être pertinent, le document doit correspondre parfaitement au Sujet, à l'Époque et au Lieu de la recherche.</div>
+                    </div>
+
+                    <!-- Question 9 -->
+                    <div class="card qcm-item" data-answer="0">
+                        <div class="qcm-question">9. Quelle est la toute première étape de la "Démarche d'investigation" (AFP) ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Observer</div>
+                            <div class="qcm-option" data-idx="1">Se questionner</div>
+                            <div class="qcm-option" data-idx="2">Rechercher</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : La démarche (AFP) commence toujours par "Observer" (mettre en évidence des changements/continuités), pour ensuite "Se questionner".</div>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <div class="card qcm-item" data-answer="2">
+                        <div class="qcm-question">10. Lors de l'évaluation de la "Fiabilité" d'un document, lequel de ces éléments indique une NON-fiabilité ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Le document est créé de la libre volonté de l'auteur.</div>
+                            <div class="qcm-option" data-idx="1">L'auteur est un témoin direct des faits.</div>
+                            <div class="qcm-option" data-idx="2">L'auteur donne son opinion personnelle et vise à persuader.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : La subjectivité dominante (opinion), les visées idéologiques ou de propagande rendent un document source non-fiable pour des faits objectifs.</div>
+                    </div>
+
+                    <!-- Question 11 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">11. Comment se distingue obligatoirement une "frise chronologique" d'un simple "tableau chronologique" ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Elle utilise toujours des images.</div>
+                            <div class="qcm-option" data-idx="1">Elle est obligatoirement graduée à l'échelle mathématique.</div>
+                            <div class="qcm-option" data-idx="2">Elle se lit toujours de droite à gauche.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : La frise est un outil mathématique. Une même mesure géométrique (ex: 1cm) correspond strictement à une même durée temporelle (ex: 10 ans).</div>
+                    </div>
+
+                    <!-- Question 12 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">12. Sur une ligne du temps, qu'inscrit-on dans la bande supérieure ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Le nom des périodes ou phénomènes (ex: Moyen Âge).</div>
+                            <div class="qcm-option" data-idx="1">Les repères métriques : les dates et les siècles.</div>
+                            <div class="qcm-option" data-idx="2">Le titre de la leçon et les événements ponctuels uniquement.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : La bande supérieure sert exclusivement aux repères mathématiques (dates de fin de période). La bande inférieure contient les noms des périodes.</div>
+                    </div>
+
+                    <!-- Question 13 -->
+                    <div class="card qcm-item" data-answer="2">
+                        <div class="qcm-question">13. Lequel de ces stades du système temporel de l'enfant (P3+) requiert une "Décentration Cognitive" ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Le temps vécu</div>
+                            <div class="qcm-option" data-idx="1">Le temps conçu</div>
+                            <div class="qcm-option" data-idx="2">Le temps historique</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Le temps historique nécessite de se détacher de son égocentrisme pour concevoir que des événements ont eu lieu longtemps avant sa propre naissance.</div>
+                    </div>
+
+                    <!-- Question 14 -->
+                    <div class="card qcm-item" data-answer="0">
+                        <div class="qcm-question">14. En P3, sur combien de générations successives le programme limite-t-il l'utilisation de l'arbre généalogique ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Quatre générations (jusqu'aux arrière-grands-parents).</div>
+                            <div class="qcm-option" data-idx="1">Trois générations (jusqu'aux grands-parents).</div>
+                            <div class="qcm-option" data-idx="2">Deux générations (parents et enfants).</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : L'arbre est limité à 4 générations : enfants, parents, grands-parents et arrière-grands-parents.</div>
+                    </div>
+
+                    <!-- Question 15 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">15. Quel est le refus didactique du "zapping documentaire" selon W. Badier ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">L'interdiction d'utiliser des documents audiovisuels.</div>
+                            <div class="qcm-option" data-idx="1">La nécessité de limiter l'analyse à 1 à 3 documents maximum par leçon pour éviter le survol superficiel.</div>
+                            <div class="qcm-option" data-idx="2">Le fait de ne jamais changer de document au cours d'une année scolaire.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Trop de documents empêche l'investigation. Il faut se limiter à 1 à 3 documents pour les analyser en profondeur.</div>
+                    </div>
+
+                    <!-- Question 16 -->
+                    <div class="card qcm-item" data-answer="2">
+                        <div class="qcm-question">16. Que signifie "étayer" un document source avant de le présenter aux élèves ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Le censurer pour ne montrer que les images.</div>
+                            <div class="qcm-option" data-idx="1">L'imprimer en grand format.</div>
+                            <div class="qcm-option" data-idx="2">Le configurer : rédiger un chapeau introductif, simplifier le lexique et ajouter des clés de lecture.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Un document brut ne doit jamais être donné tel quel en primaire. L'enseignant doit l'adapter et l'accompagner d'explications contextuelles.</div>
+                    </div>
+
+                    <!-- Question 17 -->
+                    <div class="card qcm-item" data-answer="0">
+                        <div class="qcm-question">17. Dans la "Chronologie vivante" (M. Jacquemin), comment l'outil abstrait devient-il concret pour les P3 ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">On décompose le siècle en 4 grands bandeaux colorés (époques des générations) où on associe de vieux objets et des photos.</div>
+                            <div class="qcm-option" data-idx="1">On demande aux élèves de s'habiller comme au Moyen Âge.</div>
+                            <div class="qcm-option" data-idx="2">On remplace les dates par des dessins d'animaux.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : La chronologie vivante matérialise l'espace de la classe avec les 4 époques générationnelles liées à la famille de l'enfant.</div>
+                    </div>
+
+                    <!-- Question 18 -->
+                    <div class="card qcm-item" data-answer="0">
+                        <div class="qcm-question">18. Faut-il faire mémoriser des dates phares précises (ex: 1492, 1914) à l'école primaire selon J. Le Goff ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Oui, car elles servent de "balises stables" pour ancrer des évolutions complexes dans le temps long.</div>
+                            <div class="qcm-option" data-idx="1">Non, la mémorisation de dates est formellement interdite par le programme.</div>
+                            <div class="qcm-option" data-idx="2">Oui, uniquement pour le cours de mathématiques.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : Les dates politiques stables n'ont pas d'importance en elles-mêmes, mais sont indispensables comme points de repère fixes pour structurer la pensée.</div>
+                    </div>
+
+                    <!-- Question 19 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">19. Qu'est-ce que le "déterminisme historique" ou la "vision téléologique" (qui doit être banni de l'enseignement) ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">Le fait de ne pas utiliser de ligne du temps.</div>
+                            <div class="qcm-option" data-idx="1">Croire que l'histoire est une suite mécanique, linéaire et inévitable (où l'homme ne peut rien changer).</div>
+                            <div class="qcm-option" data-idx="2">Le fait de trop critiquer les documents sources.</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : L'histoire dépend des accidents et des choix libres des acteurs. Il faut montrer les contingences et refuser l'idée que tout était écrit d'avance.</div>
+                    </div>
+
+                    <!-- Question 20 -->
+                    <div class="card qcm-item" data-answer="1">
+                        <div class="qcm-question">20. Quel était le média de masse le plus utilisé durant le "Moment clé 1" (époque des arrière-grands-parents, 1910-1930) ?</div>
+                        <div class="qcm-options">
+                            <div class="qcm-option" data-idx="0">La télévision</div>
+                            <div class="qcm-option" data-idx="1">La presse écrite (ex: Le Petit Journal)</div>
+                            <div class="qcm-option" data-idx="2">Internet</div>
+                        </div>
+                        <div class="qcm-explanation">Bonne réponse : De 1910 à 1930, les gens s'informaient principalement par la presse écrite et la radio naissante.</div>
+                    </div>
+                </div>
+
+                <button class="btn-validate" onclick="calculateScore()">Valider mes 20 réponses</button>
+                <div id="qcm-result"></div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="app-footer">
+        <p>© 2026 U1207 • Formation Historique — Réalisé avec ❤️ pour Adriano</p>
+    </footer>
+
+    <!-- Mobile Sommaire Floating Action Button -->
+    <button id="mobile-sommaire-btn" onclick="toggleMobileSommaire(true)" title="Afficher le Sommaire">
+        📋
+    </button>
+
+    <!-- Mobile Sommaire Drawer -->
+    <div id="mobile-sommaire-drawer" class="mobile-drawer">
+        <div class="drawer-overlay" onclick="toggleMobileSommaire(false)"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h3>Sommaire</h3>
+                <button class="close-drawer" onclick="toggleMobileSommaire(false)">✕</button>
+            </div>
+            <div class="drawer-body">
+                <ul>
+                    <li><a href="#part1-header">1. La Maîtrise des Contenus</a></li>
+                    <li><a href="#part1-1">- 1.1 Vocabulaire clé</a></li>
+                    <li><a href="#part1-2">- 1.2 Évolution communication & transport</a></li>
+                    <li><a href="#part1-3">- 1.3 Évolution accès au savoir</a></li>
+                    <li><a href="#part1-4">- 1.4 Périodisation</a></li>
+                    <li><a href="#part1-5">- 1.5 Le document en histoire</a></li>
+                    <li><a href="#part2-header">2. Méthodologies Spécifiques</a></li>
+                    <li><a href="#part2-1">- 2.1 Approche moments clés</a></li>
+                    <li><a href="#part2-2">- 2.2 Lire et exploiter</a></li>
+                    <li><a href="#part2-3">- 2.3 Démarche d'investigation</a></li>
+                    <li><a href="#part2-4">- 2.4 Construction de frise</a></li>
+                    <li><a href="#part3-header">3. Didactique (P3-P4)</a></li>
+                    <li><a href="#part3-1">- 3.1 Repères temporels</a></li>
+                    <li><a href="#part3-2">- 3.2 Didactique périodisation</a></li>
+                    <li><a href="#part3-3">- 3.3 Exploitation documentaire</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
